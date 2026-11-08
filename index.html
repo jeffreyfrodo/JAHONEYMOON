@@ -1,0 +1,66 @@
+<meta charset="utf-8">
+<title>Honeymoon Atlas</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css">
+
+<header class="masthead">
+  <div class="wrap masthead-inner">
+    <p class="eyebrow">December 2027 · up to 14 nights · two travelers</p>
+    <h1>Honeymoon Atlas</h1>
+    <p class="lede">Fourteen once-in-a-lifetime trips, scored on what matters to each of you and priced against the points you already hold.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="panel" aria-labelledby="priorities-h">
+    <div class="panel-head">
+      <h2 id="priorities-h">What matters to each of you</h2>
+      <p class="hint">Drag from 0 (don't care) to 5 (essential). Rankings update as you go.</p>
+    </div>
+    <div class="priorities" id="priorities"></div>
+  </section>
+
+  <section class="panel two-up">
+    <div aria-labelledby="wallet-h">
+      <h2 id="wallet-h">Points wallet</h2>
+      <div class="wallet" id="wallet"></div>
+    </div>
+    <div aria-labelledby="windows-h">
+      <h2 id="windows-h">When award space opens</h2>
+      <label class="depart" for="depart">Departure date <input type="date" id="depart"></label>
+      <ol class="windows" id="windows"></ol>
+    </div>
+  </section>
+
+  <section aria-labelledby="board-h">
+    <div class="section-head">
+      <h2 id="board-h">Scoreboard</h2>
+      <div class="filter" role="group" aria-label="Filter destinations">
+        <button type="button" id="filter-all" aria-pressed="true">All trips</button>
+        <button type="button" id="filter-short" aria-pressed="false">Shortlist</button>
+      </div>
+    </div>
+    <div class="board-scroll"><table class="board" id="board"></table></div>
+  </section>
+
+  <section class="cards" id="cards" aria-label="Destinations"></section>
+
+  <section class="panel" aria-labelledby="playbook-h">
+    <h2 id="playbook-h">Points playbook</h2>
+    <ul class="playbook" id="playbook"></ul>
+    <p class="fineprint">Award prices are estimates for business class at saver levels and change often. December holiday dates price at peak. Cash figures are for two people and cover what points don't: lodges, cruises, transfers, permits, taxes and fees.</p>
+  </section>
+
+  <footer class="credits">
+    <h2>Photo credits</h2>
+    <p class="fineprint">Photos from Wikimedia Commons, used under the licenses listed.</p>
+    <ul id="credits"></ul>
+  </footer>
+</main>
+
+<script src="data.js"></script>
+<script src="photos.js"></script>
+<script src="app.js"></script>
