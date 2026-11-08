@@ -10,7 +10,7 @@
   <div class="wrap masthead-inner">
     <p class="eyebrow">December 2027 · up to 14 nights · two travelers</p>
     <h1>Honeymoon Atlas</h1>
-    <p class="lede">Fourteen once-in-a-lifetime trips, scored on what matters to each of you and priced against the points you already hold.</p>
+    <p class="lede">Thirty-nine once-in-a-lifetime trips, each with a choice of hotels at every stop, scored on what matters to each of you and priced against the points you already hold.</p>
   </div>
 </header>
 
@@ -37,10 +37,16 @@
 
   <section aria-labelledby="board-h">
     <div class="section-head">
-      <h2 id="board-h">Scoreboard</h2>
+      <div class="board-title">
+        <h2 id="board-h">Scoreboard</h2>
+        <span class="hint" id="board-count"></span>
+      </div>
+      <div class="controls">
+      <label class="region-filter" for="region"><span class="visually-hidden">Region</span><select id="region"></select></label>
       <div class="filter" role="group" aria-label="Filter destinations">
         <button type="button" id="filter-all" aria-pressed="true">All trips</button>
         <button type="button" id="filter-short" aria-pressed="false">Shortlist</button>
+      </div>
       </div>
     </div>
     <div class="board-scroll"><table class="board" id="board"></table></div>
@@ -51,16 +57,18 @@
   <section class="panel" aria-labelledby="playbook-h">
     <h2 id="playbook-h">Points playbook</h2>
     <ul class="playbook" id="playbook"></ul>
-    <p class="fineprint">Award prices are estimates for business class at saver levels and change often. December holiday dates price at peak. Cash figures are for two people and cover what points don't: lodges, cruises, transfers, permits, taxes and fees.</p>
+    <p class="fineprint">Award prices are estimates for business class at saver levels, and hotel rates are estimates for a standard room in December; both change often. December holiday dates price at peak. Cash figures are for two people: the cash stays you pick plus transfers, permits, park fees, taxes and meals.</p>
   </section>
 
   <footer class="credits">
     <h2>Photo credits</h2>
-    <p class="fineprint">Photos from Wikimedia Commons, used under the licenses listed.</p>
+    <p class="fineprint">Photos load from Wikimedia Commons and are used under the licenses listed.</p>
     <ul id="credits"></ul>
   </footer>
 </main>
 
 <script src="data.js"></script>
+<script src="hotels.js"></script>
+<script src="trips.js"></script>
 <script src="photos.js"></script>
 <script src="app.js"></script>

@@ -1,7 +1,26 @@
-const STORAGE_KEY = "honeymoon-atlas-v1";
+const STORAGE_KEY = "honeymoon-atlas-v2";
 const PARTNERS = ["a", "b"];
 
+validateData();
 const state = loadState();
+
+// ---------- data checks ----------
+
+function validateData() {
+  for (const d of DESTINATIONS) {
+    for (const [place, , ids] of d.stops) {
+      for (const id of ids) {
+        if (!HOTELS[id]) throw new Error(`${d.id}: unknown hotel "${id}" at ${place}`);
+        if (!PROGRAMS[HOTELS[id].program]) throw new Error(`${id}: unknown program "${HOTELS[id].program}"`);
+      }
+    }
+    for (const [slug] of d.photos) {
+      if (!PHOTOS[slug]) throw new Error(`${d.id}: missing photo "${slug}"`);
+    }
+  }
+}
+
+// ---------- state ----------
 
 function defaultState() {
   const weights = Object.fromEntries(CATEGORIES.map((c) => [c.id, 3]));
@@ -11,7 +30,9 @@ function defaultState() {
     balances: Object.fromEntries(WALLETS.map((w) => [w.id, w.balance])),
     depart: "2027-12-11",
     likes: {},
+    stays: {},
     filter: "all",
+    region: "all",
   };
 }
 
@@ -33,10 +54,13 @@ function saveState() {
   }
 }
 
+// ---------- helpers ----------
+
 const $ = (sel) => document.querySelector(sel);
-const fmt = (n) => n.toLocaleString("en-US");
-const usd = (n) => "$" + Math.round(n / 1000) + "k";
+const fmt = (n) => Math.round(n).toLocaleString("en-US");
+const usdK = (n) => "$" + Math.round(n / 1000) + "k";
 const pct = (x) => Math.round(x * 100) + "%";
+const walletLabel = (id) => (id === "cash" ? "Cash" : WALLETS.find((w) => w.id === id).label);
 
 function el(tag, attrs = {}, ...children) {
   const node = document.createElement(tag);
@@ -49,41 +73,101 @@ function el(tag, attrs = {}, ...children) {
   return node;
 }
 
+function rateLabel(hotel) {
+  if (hotel.program === "cash") return `$${fmt(hotel.rate)}/night`;
+  return `${Math.round(hotel.rate / 1000)}k ${PROGRAMS[hotel.program].label}/night`;
+}
+
+// ---------- budget ----------
+
+function chosenStay(d, i) {
+  const ids = d.stops[i][2];
+  const saved = state.stays[d.id]?.[i];
+  return ids.includes(saved) ? saved : ids[0];
+}
+
+function budget(d) {
+  const needed = Object.fromEntries(WALLETS.map((w) => [w.id, 0]));
+  const lines = [];
+  let cash = 0;
+  let marriott = 0;
+  let pointNights = 0;
+  let totalNights = 0;
+
+  for (const [label, wallet, amount] of d.flights) {
+    if (wallet === "cash") cash += amount;
+    else needed[wallet] += amount;
+    lines.push([label, walletLabel(wallet), wallet === "cash" ? `$${fmt(amount)}` : fmt(amount)]);
+  }
+
+  d.stops.forEach(([place, nights], i) => {
+    const hotel = HOTELS[chosenStay(d, i)];
+    totalNights += nights;
+    const label = `${place}: ${hotel.name}, ${nights} ${nights === 1 ? "night" : "nights"}`;
+    if (hotel.program === "cash") {
+      cash += hotel.rate * nights;
+      lines.push([label, "Cash", `$${fmt(hotel.rate * nights)}`]);
+      return;
+    }
+    const prog = PROGRAMS[hotel.program];
+    const free = prog.fifthNightFree ? Math.floor(nights / 5) : 0;
+    const points = (nights - free) * hotel.rate;
+    pointNights += nights;
+    if (hotel.program === "marriott") marriott += points;
+    else needed[prog.wallet] += points / prog.ratio;
+    const via = prog.wallet === "amex" ? `Amex → ${prog.label} 1:${prog.ratio}` : `${walletLabel(prog.wallet)} → ${prog.label}`;
+    lines.push([label + (free ? " (5th free)" : ""), hotel.program === "marriott" ? "Marriott Bonvoy" : via, `${fmt(points)} ${prog.label}`]);
+  });
+
+  needed.marriott = Math.min(marriott, state.balances.marriott);
+  const topUp = marriott - needed.marriott;
+  if (topUp > 0) {
+    needed.amex += topUp;
+    lines.push(["Marriott shortfall", "Amex → Marriott 1:1", fmt(topUp)]);
+  }
+
+  const short = WALLETS.filter((w) => needed[w.id] > state.balances[w.id]);
+  return {
+    lines,
+    needed,
+    short,
+    cash: [d.extras[0] + cash, d.extras[1] + cash],
+    pointsScore: Math.round(4 + (6 * pointNights) / totalNights),
+    totalNights,
+  };
+}
+
 // ---------- scoring ----------
 
-function match(dest, weights) {
+function match(scores, weights) {
   let total = 0;
   let max = 0;
   for (const c of CATEGORIES) {
-    total += weights[c.id] * dest.scores[c.id];
+    total += weights[c.id] * scores[c.id];
     max += weights[c.id] * 10;
   }
   return max === 0 ? 0 : total / max;
 }
 
-function pointsNeeded(dest) {
-  const needed = Object.fromEntries(WALLETS.map((w) => [w.id, 0]));
-  for (const [, wallet, points] of dest.plan) needed[wallet] += points;
-  return needed;
-}
-
-function coverage(dest) {
-  const needed = pointsNeeded(dest);
-  const short = WALLETS.filter((w) => needed[w.id] > state.balances[w.id]);
-  return { needed, short };
-}
-
 function ranked() {
   return DESTINATIONS.map((d) => {
-    const a = match(d, state.weights.a);
-    const b = match(d, state.weights.b);
-    return { d, a, b, both: (a + b) / 2 };
+    const b = budget(d);
+    const scores = { ...d.scores, points: b.pointsScore };
+    const a = match(scores, state.weights.a);
+    const bb = match(scores, state.weights.b);
+    return { d, budget: b, scores, a, b: bb, both: (a + bb) / 2 };
   }).sort((x, y) => y.both - x.both);
 }
 
 function isShortlisted(id) {
   const l = state.likes[id];
   return Boolean(l && (l.a || l.b));
+}
+
+function isVisible(d) {
+  if (state.region !== "all" && d.region !== state.region) return false;
+  if (state.filter === "short" && !isShortlisted(d.id)) return false;
+  return true;
 }
 
 // ---------- priorities ----------
@@ -149,12 +233,11 @@ function renderWindows() {
   for (const w of BOOKING_WINDOWS) {
     const opens = new Date(depart.getTime() - w.days * 86400000);
     const days = Math.ceil((opens - today) / 86400000);
-    const when = days > 0 ? `in ${days} days` : "open now";
     root.append(
       el("li", { class: days > 0 ? "" : "is-open" },
         el("span", { class: "win-prog", text: w.program }),
         el("span", { class: "win-date", text: opens.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) }),
-        el("span", { class: "win-when", text: when }))
+        el("span", { class: "win-when", text: days > 0 ? `in ${days} days` : "open now" }))
     );
   }
 }
@@ -169,7 +252,6 @@ function heatClass(score) {
 }
 
 function renderBoard(rows) {
-  const table = $("#board");
   const head = el("tr", {},
     el("th", { scope: "col", text: "#" }),
     el("th", { scope: "col", class: "left", text: "Trip" }),
@@ -180,49 +262,76 @@ function renderBoard(rows) {
     el("th", { scope: "col", text: "Points" }),
     el("th", { scope: "col", text: "Cash for two" })
   );
-  const body = rows.map(({ d, a, b, both }, i) => {
-    const { short } = coverage(d);
-    const link = el("a", { href: `#${d.id}`, text: d.name });
-    return el("tr", { class: isShortlisted(d.id) ? "is-short" : "" },
-      el("td", { class: "num rank", text: i + 1 }),
-      el("td", { class: "left trip" }, link),
-      el("td", { class: "num strong", text: pct(both) }),
-      el("td", { class: "num col-a", text: pct(a) }),
-      el("td", { class: "num col-b", text: pct(b) }),
-      ...CATEGORIES.map((c) => el("td", { class: `heat ${heatClass(d.scores[c.id])}`, text: d.scores[c.id] })),
-      el("td", { class: short.length ? "pts short" : "pts ok", text: short.length ? "Top-up" : "Covered" }),
-      el("td", { class: "num", text: `${usd(d.cash[0])}–${usd(d.cash[1])}` })
-    );
-  });
-  table.replaceChildren(el("thead", {}, head), el("tbody", {}, ...body));
+  const body = rows.map((r, i) => el("tr", { class: isShortlisted(r.d.id) ? "is-short" : "" },
+    el("td", { class: "num rank", text: i + 1 }),
+    el("td", { class: "left trip" }, el("a", { href: `#${r.d.id}`, text: r.d.name }), el("span", { class: "board-region", text: r.d.region })),
+    el("td", { class: "num strong", text: pct(r.both) }),
+    el("td", { class: "num col-a", text: pct(r.a) }),
+    el("td", { class: "num col-b", text: pct(r.b) }),
+    ...CATEGORIES.map((c) => el("td", { class: `heat ${heatClass(r.scores[c.id])}`, text: r.scores[c.id] })),
+    el("td", { class: r.budget.short.length ? "pts short" : "pts ok", text: r.budget.short.length ? "Top-up" : "Covered" }),
+    el("td", { class: "num", text: `${usdK(r.budget.cash[0])}–${usdK(r.budget.cash[1])}` })
+  ));
+  $("#board").replaceChildren(el("thead", {}, head), el("tbody", {}, ...body));
+  $("#board-count").textContent = `${rows.length} of ${DESTINATIONS.length} trips`;
 }
 
 // ---------- cards ----------
 
 const cardNodes = new Map();
 
-function buildCard(d) {
+function buildGallery(d) {
   const track = el("div", { class: "photo-track", tabindex: "0", "aria-label": `${d.name} photos` });
   for (const [slug, caption] of d.photos) {
     const p = PHOTOS[slug];
-    if (!p) throw new Error(`Missing photo credit for ${slug}`);
     track.append(
       el("figure", { class: "photo" },
-        el("img", { src: `photos/${slug}.jpg`, alt: caption, loading: "lazy", width: "1000", height: "640" }),
+        el("img", { src: p.url, alt: caption, loading: "lazy", width: "1280", height: "720", referrerpolicy: "no-referrer" }),
         el("figcaption", {},
           el("span", { class: "cap", text: caption }),
           el("a", { class: "credit", href: p.source, target: "_blank", rel: "noopener", text: `${p.artist} · ${p.license}` })))
     );
   }
-  const prev = el("button", { type: "button", class: "nav prev", "aria-label": "Previous photo", text: "‹" });
-  const next = el("button", { type: "button", class: "nav next", "aria-label": "Next photo", text: "›" });
-  prev.addEventListener("click", () => track.scrollBy({ left: -track.clientWidth, behavior: "smooth" }));
-  next.addEventListener("click", () => track.scrollBy({ left: track.clientWidth, behavior: "smooth" }));
-  const gallery = el("div", { class: "gallery" }, track, prev, next);
+  const gallery = el("div", { class: "gallery" }, track);
+  if (d.photos.length > 1) {
+    const prev = el("button", { type: "button", class: "nav prev", "aria-label": "Previous photo", text: "‹" });
+    const next = el("button", { type: "button", class: "nav next", "aria-label": "Next photo", text: "›" });
+    prev.addEventListener("click", () => track.scrollBy({ left: -track.clientWidth, behavior: "smooth" }));
+    next.addEventListener("click", () => track.scrollBy({ left: track.clientWidth, behavior: "smooth" }));
+    gallery.append(prev, next);
+  }
+  return gallery;
+}
 
-  const route = el("ol", { class: "route" }, ...d.route.map(([place, nights]) =>
-    el("li", {}, el("span", { class: "stop", text: place }), el("span", { class: "nights", text: `${nights}n` }))));
-  const totalNights = d.route.reduce((s, [, n]) => s + n, 0);
+function buildStays(d) {
+  return el("div", { class: "stays" }, ...d.stops.map(([place, nights, ids], i) => {
+    const name = `stay-${d.id}-${i}`;
+    const options = ids.map((id) => {
+      const h = HOTELS[id];
+      const input = el("input", { type: "radio", name, id: `${name}-${id}`, value: id });
+      input.checked = chosenStay(d, i) === id;
+      input.addEventListener("change", () => {
+        state.stays[d.id] = { ...(state.stays[d.id] || {}), [i]: id };
+        saveState();
+        update();
+      });
+      return el("label", { class: `stay prog-${h.program}`, for: `${name}-${id}` },
+        input,
+        el("span", { class: "stay-main" },
+          el("span", { class: "stay-name", text: h.name }),
+          el("span", { class: "stay-note", text: h.note })),
+        el("span", { class: "stay-rate", text: rateLabel(h) }));
+    });
+    return el("fieldset", { class: "stop" },
+      el("legend", {}, el("span", { class: "stop-place", text: place }), el("span", { class: "stop-nights", text: `${nights} ${nights === 1 ? "night" : "nights"}` })),
+      ...options);
+  }));
+}
+
+function buildCard(d) {
+  const route = el("ol", { class: "route" }, ...d.stops.map(([place, nights]) =>
+    el("li", {}, el("span", { class: "stop-chip", text: place }), el("span", { class: "nights", text: `${nights}n` }))));
+  const totalNights = d.stops.reduce((s, [, n]) => s + n, 0);
 
   const likeBtns = PARTNERS.map((p) => {
     const b = el("button", { type: "button", class: `like like-${p}`, "aria-pressed": "false" });
@@ -236,86 +345,93 @@ function buildCard(d) {
     return b;
   });
 
-  const bars = el("ul", { class: "bars" }, ...CATEGORIES.map((c) =>
-    el("li", {},
-      el("span", { class: "bar-label", text: c.label }),
-      el("span", { class: "bar-track" }, el("span", { class: `bar-fill ${heatClass(d.scores[c.id])}`, style: `width:${d.scores[c.id] * 10}%` })),
-      el("span", { class: "bar-num", text: d.scores[c.id] }))));
+  const node = {
+    rank: el("span", { class: "rank-badge" }),
+    scoreA: el("span", { class: "score-a" }),
+    scoreB: el("span", { class: "score-b" }),
+    scoreBoth: el("span", { class: "score-both" }),
+    bars: el("ul", { class: "bars" }),
+    planBody: el("tbody"),
+    usage: el("div", { class: "usage" }),
+    cash: el("span", { class: "cash-num" }),
+    likeBtns,
+  };
 
-  const planRows = d.plan.map(([label, wallet, points]) =>
-    el("tr", {},
-      el("td", { text: label }),
-      el("td", { class: "wallet-tag", text: WALLETS.find((w) => w.id === wallet).label }),
-      el("td", { class: "num", text: fmt(points) })));
-  const plan = el("table", { class: "plan" },
-    el("thead", {}, el("tr", {}, el("th", { text: "Booked with points" }), el("th", { text: "From" }), el("th", { class: "num", text: "Points" }))),
-    el("tbody", {}, ...planRows));
-  const usage = el("div", { class: "usage" });
-
-  const scoreA = el("span", { class: "score-a" });
-  const scoreB = el("span", { class: "score-b" });
-  const scoreBoth = el("span", { class: "score-both" });
-  const rank = el("span", { class: "rank-badge" });
-
-  const card = el("article", { class: "card", id: d.id },
-    gallery,
+  node.card = el("article", { class: "card", id: d.id },
+    buildGallery(d),
     el("div", { class: "card-body" },
       el("div", { class: "card-top" },
         el("div", { class: "title-block" },
-          rank,
+          el("span", { class: "eyebrow-row" }, node.rank, el("span", { class: "region-tag", text: d.region })),
           el("h3", { text: d.name }),
           el("p", { class: "tagline", text: d.tagline })),
-        el("div", { class: "match" }, scoreBoth, el("span", { class: "match-label", text: "match" }), el("div", { class: "match-split" }, scoreA, scoreB))),
+        el("div", { class: "match" }, node.scoreBoth, el("span", { class: "match-label", text: "match" }), el("div", { class: "match-split" }, node.scoreA, node.scoreB))),
       el("div", { class: "route-wrap" }, route, el("span", { class: "total", text: `${totalNights} nights · ${d.hours}` })),
       el("div", { class: "likes" }, ...likeBtns),
       el("p", { class: "december" }, el("strong", { text: "December: " }), d.december),
       el("div", { class: "detail-grid" },
-        bars,
+        node.bars,
         el("div", { class: "pros-cons" },
           el("h4", { text: "Why go" }),
           el("ul", { class: "pros" }, ...d.highlights.map((h) => el("li", { text: h }))),
           el("h4", { text: "Watch out for" }),
           el("ul", { class: "cons" }, ...d.watchouts.map((h) => el("li", { text: h }))))),
+      el("section", { class: "where" },
+        el("h4", { text: "Where to stay" }),
+        buildStays(d)),
       el("div", { class: "money" },
-        el("div", { class: "plan-scroll" }, plan),
+        el("div", { class: "plan-scroll" },
+          el("table", { class: "plan" },
+            el("thead", {}, el("tr", {}, el("th", { text: "Booking" }), el("th", { text: "Paid with" }), el("th", { class: "num", text: "Cost" }))),
+            node.planBody)),
         el("div", { class: "money-side" },
-          usage,
-          el("p", { class: "cash" }, el("span", { class: "cash-num", text: `${usd(d.cash[0])}–${usd(d.cash[1])}` }), el("span", { class: "cash-label", text: "estimated cash for two, on top of points" }))))));
-
-  return { card, rank, scoreA, scoreB, scoreBoth, likeBtns, usage };
+          node.usage,
+          el("p", { class: "cash" }, node.cash, el("span", { class: "cash-label", text: "cash for two: cash stays plus transfers, fees and meals" }))))));
+  return node;
 }
 
-function updateCard(node, d, row, i) {
+function updateCard(node, r, i) {
+  const { d, budget: b } = r;
   node.rank.textContent = `No. ${i + 1}`;
-  node.scoreBoth.textContent = pct(row.both);
-  node.scoreA.textContent = `${state.names.a} ${pct(row.a)}`;
-  node.scoreB.textContent = `${state.names.b} ${pct(row.b)}`;
+  node.scoreBoth.textContent = pct(r.both);
+  node.scoreA.textContent = `${state.names.a} ${pct(r.a)}`;
+  node.scoreB.textContent = `${state.names.b} ${pct(r.b)}`;
+
   const likes = state.likes[d.id] || {};
   PARTNERS.forEach((p, idx) => {
-    const btn = node.likeBtns[idx];
-    btn.setAttribute("aria-pressed", String(Boolean(likes[p])));
-    btn.textContent = `${likes[p] ? "♥" : "♡"} ${state.names[p]}`;
+    node.likeBtns[idx].setAttribute("aria-pressed", String(Boolean(likes[p])));
+    node.likeBtns[idx].textContent = `${likes[p] ? "♥" : "♡"} ${state.names[p]}`;
   });
-  const { needed } = coverage(d);
-  node.usage.replaceChildren(...WALLETS.filter((w) => needed[w.id] > 0).map((w) => {
+
+  node.bars.replaceChildren(...CATEGORIES.map((c) =>
+    el("li", {},
+      el("span", { class: "bar-label", text: c.label }),
+      el("span", { class: "bar-track" }, el("span", { class: `bar-fill ${heatClass(r.scores[c.id])}`, style: `width:${r.scores[c.id] * 10}%` })),
+      el("span", { class: "bar-num", text: r.scores[c.id] }))));
+
+  node.planBody.replaceChildren(...b.lines.map(([label, from, cost]) =>
+    el("tr", {}, el("td", { text: label }), el("td", { class: "wallet-tag", text: from }), el("td", { class: "num", text: cost }))));
+
+  node.usage.replaceChildren(...WALLETS.filter((w) => b.needed[w.id] > 0).map((w) => {
     const bal = state.balances[w.id];
-    const ratio = bal === 0 ? 1 : Math.min(needed[w.id] / bal, 1);
-    const over = needed[w.id] > bal;
+    const need = b.needed[w.id];
+    const over = need > bal;
     return el("div", { class: `use ${over ? "over" : ""}` },
       el("div", { class: "use-head" },
         el("span", { text: w.label }),
-        el("span", { class: "num", text: over ? `short ${fmt(needed[w.id] - bal)}` : `${fmt(needed[w.id])} of ${fmt(bal)}` })),
-      el("span", { class: "use-track" }, el("span", { class: "use-fill", style: `width:${ratio * 100}%` })));
+        el("span", { class: "num", text: over ? `short ${fmt(need - bal)}` : `${fmt(need)} of ${fmt(bal)}` })),
+      el("span", { class: "use-track" }, el("span", { class: "use-fill", style: `width:${bal === 0 ? 100 : Math.min(need / bal, 1) * 100}%` })));
   }));
-  node.card.hidden = state.filter === "short" && !isShortlisted(d.id);
+  node.cash.textContent = `${usdK(b.cash[0])}–${usdK(b.cash[1])}`;
+  node.card.hidden = !isVisible(d);
 }
 
 function renderCards(rows) {
   const root = $("#cards");
-  rows.forEach((row, i) => {
-    if (!cardNodes.has(row.d.id)) cardNodes.set(row.d.id, buildCard(row.d));
-    const node = cardNodes.get(row.d.id);
-    updateCard(node, row.d, row, i);
+  rows.forEach((r, i) => {
+    if (!cardNodes.has(r.d.id)) cardNodes.set(r.d.id, buildCard(r.d));
+    const node = cardNodes.get(r.d.id);
+    updateCard(node, r, i);
     root.append(node.card);
   });
 }
@@ -334,6 +450,20 @@ function renderCredits() {
   }));
 }
 
+function renderRegionFilter() {
+  const select = $("#region");
+  const regions = [...new Set(DESTINATIONS.map((d) => d.region))];
+  select.replaceChildren(
+    el("option", { value: "all", text: "All regions" }),
+    ...regions.map((r) => el("option", { value: r, text: r })));
+  select.value = state.region;
+  select.addEventListener("change", () => {
+    state.region = select.value;
+    saveState();
+    update();
+  });
+}
+
 function renderFilter() {
   $("#filter-all").setAttribute("aria-pressed", String(state.filter === "all"));
   $("#filter-short").setAttribute("aria-pressed", String(state.filter === "short"));
@@ -343,8 +473,7 @@ function renderFilter() {
 
 function update() {
   const rows = ranked();
-  const visible = state.filter === "short" ? rows.filter((r) => isShortlisted(r.d.id)) : rows;
-  renderBoard(visible);
+  renderBoard(rows.filter((r) => isVisible(r.d)));
   renderCards(rows);
   renderFilter();
 }
@@ -368,6 +497,7 @@ function init() {
   renderPriorities();
   renderWallet();
   renderWindows();
+  renderRegionFilter();
   renderPlaybook();
   renderCredits();
   update();
