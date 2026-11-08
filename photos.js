@@ -395,344 +395,344 @@ const PHOTOS = {
   "japan-kinkakuji": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Golden_Pavilion_Kinkaku-ji_water_mirror_2024.jpg/1280px-Golden_Pavilion_Kinkaku-ji_water_mirror_2024.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:Golden_Pavilion_Kinkaku-ji_water_mirror_2024.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "artist": "Nacaru",
+    "license": "CC BY-SA 4.0",
     "title": "Golden Pavilion Kinkaku-ji water mirror 2024"
   },
   "japan-fushimi": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Torii_path_with_lantern_at_Fushimi_Inari_Taisha_Shrine%2C_Kyoto%2C_Japan.jpg/1280px-Torii_path_with_lantern_at_Fushimi_Inari_Taisha_Shrine%2C_Kyoto%2C_Japan.jpg",
-    "source": "https://commons.wikimedia.org/wiki/File:Torii_path_with_lantern_at_Fushimi_Inari_Taisha_Shrine%2C_Kyoto%2C_Japan.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "source": "https://commons.wikimedia.org/wiki/File:Torii_path_with_lantern_at_Fushimi_Inari_Taisha_Shrine,_Kyoto,_Japan.jpg",
+    "artist": "Basile Morin",
+    "license": "CC BY-SA 4.0",
     "title": "Torii path with lantern at Fushimi Inari Taisha Shrine, Kyoto, Japan"
   },
   "japan-niseko": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/%E3%83%8B%E3%82%BB%E3%82%B3%E6%9D%B1%E5%B1%B1%E3%82%B9%E3%82%AD%E3%83%BC%E5%A0%B42.JPG/1280px-%E3%83%8B%E3%82%BB%E3%82%B3%E6%9D%B1%E5%B1%B1%E3%82%B9%E3%82%AD%E3%83%BC%E5%A0%B42.JPG",
     "source": "https://commons.wikimedia.org/wiki/File:%E3%83%8B%E3%82%BB%E3%82%B3%E6%9D%B1%E5%B1%B1%E3%82%B9%E3%82%AD%E3%83%BC%E5%A0%B42.JPG",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "artist": "Wakimasa",
+    "license": "CC BY-SA 3.0",
     "title": "ニセコ東山スキー場2"
   },
   "thai-phangnga": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Dramatic_karst_landscape_of_Phang_Nga_Bay%2C_Thailand.jpg/1280px-Dramatic_karst_landscape_of_Phang_Nga_Bay%2C_Thailand.jpg",
-    "source": "https://commons.wikimedia.org/wiki/File:Dramatic_karst_landscape_of_Phang_Nga_Bay%2C_Thailand.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "source": "https://commons.wikimedia.org/wiki/File:Dramatic_karst_landscape_of_Phang_Nga_Bay,_Thailand.jpg",
+    "artist": "Vyacheslav Argenberg",
+    "license": "CC BY 4.0",
     "title": "Dramatic karst landscape of Phang Nga Bay, Thailand"
   },
   "thai-whitetemple": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Wat_Rong_Khun_-_Chiang_Rai.jpg/1280px-Wat_Rong_Khun_-_Chiang_Rai.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:Wat_Rong_Khun_-_Chiang_Rai.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "artist": "JJ Harrison (",
+    "license": "CC BY-SA 3.0",
     "title": "Wat Rong Khun - Chiang Rai"
   },
   "vn-halong": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Ha_Long_Bay_in_2019.jpg/1280px-Ha_Long_Bay_in_2019.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:Ha_Long_Bay_in_2019.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "artist": "Taewangkorea",
+    "license": "CC BY-SA 4.0",
     "title": "Ha Long Bay in 2019"
   },
   "vn-phuquoc": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Bai-sao-phu-quoc-tuonglamphotos.jpg/1280px-Bai-sao-phu-quoc-tuonglamphotos.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:Bai-sao-phu-quoc-tuonglamphotos.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "artist": "[//commons.wikimedia.org/wiki/User:Trantuonglam Trantuonglam]",
+    "license": "CC BY-SA 4.0",
     "title": "Bai-sao-phu-quoc-tuonglamphotos"
   },
   "angkor-wat": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Angkor_Wat.jpg/1280px-Angkor_Wat.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:Angkor_Wat.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "artist": "Bjørn Christian Tørrissen",
+    "license": "CC BY-SA 4.0",
     "title": "Angkor Wat"
   },
   "angkor-taprohm": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Ta_Prohm_%28III%29.jpg/1280px-Ta_Prohm_%28III%29.jpg",
-    "source": "https://commons.wikimedia.org/wiki/File:Ta_Prohm_%28III%29.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "source": "https://commons.wikimedia.org/wiki/File:Ta_Prohm_(III).jpg",
+    "artist": "This Photo was taken by Supanut Arunoprayote. Feel free to use any of my images, but please mention me as the author and may send me a message. (สามารถใช้ภาพได้อิสระ แต่กรุณาใส่เครดิตผู้ถ่ายและอาจส่งข้อความบอกกล่าวด้วย) Please do not upload an updated image here without consultation with the Author. The author would like to make corrections only at his own source. This ensures that the changes are preserved.Please if you think that any changes should be required, please inform the author.Otherwise you can upload a new image with a new name. Please use one of the templates",
+    "license": "CC BY 4.0",
     "title": "Ta Prohm (III)"
   },
   "laos-luangprabang": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Phou_si_Luang_Prabang_Laos_%E3%83%97%E3%83%BC%E3%82%B7%E3%83%BC%E3%81%AE%E4%B8%98_%E3%83%A9%E3%82%AA%E3%82%B9%E3%83%BB%E3%83%AB%E3%82%A2%E3%83%B3%E3%83%97%E3%83%A9%E3%83%90%E3%83%BC%E3%83%B3_DSCF6777.jpg/1280px-Phou_si_Luang_Prabang_Laos_%E3%83%97%E3%83%BC%E3%82%B7%E3%83%BC%E3%81%AE%E4%B8%98_%E3%83%A9%E3%82%AA%E3%82%B9%E3%83%BB%E3%83%AB%E3%82%A2%E3%83%B3%E3%83%97%E3%83%A9%E3%83%90%E3%83%BC%E3%83%B3_DSCF6777.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:Phou_si_Luang_Prabang_Laos_%E3%83%97%E3%83%BC%E3%82%B7%E3%83%BC%E3%81%AE%E4%B8%98_%E3%83%A9%E3%82%AA%E3%82%B9%E3%83%BB%E3%83%AB%E3%82%A2%E3%83%B3%E3%83%97%E3%83%A9%E3%83%90%E3%83%BC%E3%83%B3_DSCF6777.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "artist": "松岡明芳",
+    "license": "CC BY-SA 3.0",
     "title": "Phou si Luang Prabang Laos プーシーの丘 ラオス・ルアンプラバーン DSCF6777"
   },
   "indo-komodo": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/202306_Varanus_komodoensis.jpg/1280px-202306_Varanus_komodoensis.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:202306_Varanus_komodoensis.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "artist": "James Jolokia (james1203)",
+    "license": "CC BY 4.0",
     "title": "202306 Varanus komodoensis"
   },
   "ph-elnido": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/El_Nido_Bay_December_2018.jpg/1280px-El_Nido_Bay_December_2018.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:El_Nido_Bay_December_2018.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "artist": "Kalithecat00",
+    "license": "CC BY-SA 4.0",
     "title": "El Nido Bay December 2018"
   },
   "nepal-everest": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Mt._Everest_from_Gokyo_Ri_November_5%2C_2012.jpg/1280px-Mt._Everest_from_Gokyo_Ri_November_5%2C_2012.jpg",
-    "source": "https://commons.wikimedia.org/wiki/File:Mt._Everest_from_Gokyo_Ri_November_5%2C_2012.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "source": "https://commons.wikimedia.org/wiki/File:Mt._Everest_from_Gokyo_Ri_November_5,_2012.jpg",
+    "artist": "Rdevany",
+    "license": "CC BY-SA 3.0",
     "title": "Mt. Everest from Gokyo Ri November 5, 2012"
   },
   "nepal-chitwan": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Chitwan_swamp.jpg/1280px-Chitwan_swamp.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:Chitwan_swamp.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "artist": "Vadim Tolbatov",
+    "license": "CC BY-SA 4.0",
     "title": "Chitwan swamp"
   },
   "kerala-houseboat": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/House_Boat_DSW.jpg/1280px-House_Boat_DSW.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:House_Boat_DSW.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "artist": "Augustus Binu : flickr",
+    "license": "CC BY-SA 3.0",
     "title": "House Boat DSW"
   },
   "kerala-munnar": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Munnar_Overview.jpg/1280px-Munnar_Overview.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:Munnar_Overview.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "artist": "Kondephy",
+    "license": "CC BY-SA 4.0",
     "title": "Munnar Overview"
   },
   "oman-jebelakhdar": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Jebel_Akhdar_view.jpg/1280px-Jebel_Akhdar_view.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:Jebel_Akhdar_view.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "artist": "Philipp Weigell",
+    "license": "CC BY 3.0",
     "title": "Jebel Akhdar view"
   },
   "seychelles-ladigue": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/La_Digue_asv2024-10_img22_Union_Estate.jpg/1280px-La_Digue_asv2024-10_img22_Union_Estate.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:La_Digue_asv2024-10_img22_Union_Estate.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "artist": "A.Savin",
+    "license": "FAL",
     "title": "La Digue asv2024-10 img22 Union Estate"
   },
   "dubai-burj": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Burj_Khalifa_%28worlds_tallest_building%29_and_the_Dubai_skyline_%2825781049892%29.jpg/1280px-Burj_Khalifa_%28worlds_tallest_building%29_and_the_Dubai_skyline_%2825781049892%29.jpg",
-    "source": "https://commons.wikimedia.org/wiki/File:Burj_Khalifa_%28worlds_tallest_building%29_and_the_Dubai_skyline_%2825781049892%29.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "source": "https://commons.wikimedia.org/wiki/File:Burj_Khalifa_(worlds_tallest_building)_and_the_Dubai_skyline_(25781049892).jpg",
+    "artist": "imran shahabuddin",
+    "license": "CC BY 2.0",
     "title": "Burj Khalifa (worlds tallest building) and the Dubai skyline (25781049892)"
   },
   "aus-wineglass": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Wineglass_Bay_view_from_the_Beach.jpg/1280px-Wineglass_Bay_view_from_the_Beach.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:Wineglass_Bay_view_from_the_Beach.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "artist": "Jane6592",
+    "license": "CC BY-SA 4.0",
     "title": "Wineglass Bay view from the Beach"
   },
   "aus-cradle": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Cradle_Mountain_Behind_Dove_Lake.jpg/1280px-Cradle_Mountain_Behind_Dove_Lake.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:Cradle_Mountain_Behind_Dove_Lake.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "artist": "Bjørn Christian Tørrissen",
+    "license": "CC BY-SA 3.0",
     "title": "Cradle Mountain Behind Dove Lake"
   },
   "aus-remarkable": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Remarkable_Rocks_02.jpg/1280px-Remarkable_Rocks_02.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:Remarkable_Rocks_02.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "artist": "Bernard Gagnon",
+    "license": "CC BY-SA 4.0",
     "title": "Remarkable Rocks 02"
   },
   "cr-arenal": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Arenal_volcano_%2870785p%29_%28cropped%29.jpg/1280px-Arenal_volcano_%2870785p%29_%28cropped%29.jpg",
-    "source": "https://commons.wikimedia.org/wiki/File:Arenal_volcano_%2870785p%29_%28cropped%29.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "source": "https://commons.wikimedia.org/wiki/File:Arenal_volcano_(70785p)_(cropped).jpg",
+    "artist": "Rhododendrites",
+    "license": "CC BY-SA 4.0",
     "title": "Arenal volcano (70785p) (cropped)"
   },
   "cr-monteverde": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Monteverde_bosque.jpg/1280px-Monteverde_bosque.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:Monteverde_bosque.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "artist": "Haakon S. Krohn",
+    "license": "CC BY-SA 3.0",
     "title": "Monteverde bosque"
   },
   "belize-bluehole": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Great_Blue_Hole.jpg/1280px-Great_Blue_Hole.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/6/61/Great_Blue_Hole.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:Great_Blue_Hole.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "artist": "U.S. Geological Survey (USGS)",
+    "license": "Public domain",
     "title": "Great Blue Hole"
   },
   "guat-tikal": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Tikal_3.jpg/1280px-Tikal_3.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:Tikal_3.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "artist": "Mundo Maya",
+    "license": "CC BY-SA 4.0",
     "title": "Tikal 3"
   },
   "mx-montealban": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Monte_Alban_West_Side_Platform.jpg/1280px-Monte_Alban_West_Side_Platform.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:Monte_Alban_West_Side_Platform.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "artist": "nsaum75 !Dígame¡‎",
+    "license": "CC BY-SA 3.0",
     "title": "Monte Alban West Side Platform"
   },
   "mx-hierve": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/HierveElAguaMexico1.jpg/1280px-HierveElAguaMexico1.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/4/43/HierveElAguaMexico1.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:HierveElAguaMexico1.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "artist": "The original uploader was Lavintzin at English Wikipedia.",
+    "license": "CC BY-SA 2.5",
     "title": "HierveElAguaMexico1"
   },
   "br-iguazu": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Aerial_Foz_de_Igua%C3%A7u_26_Nov_2005.jpg/1280px-Aerial_Foz_de_Igua%C3%A7u_26_Nov_2005.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:Aerial_Foz_de_Igua%C3%A7u_26_Nov_2005.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "artist": "Mariordo (Mario Roberto Durán Ortiz)",
+    "license": "CC BY-SA 4.0",
     "title": "Aerial Foz de Iguaçu 26 Nov 2005"
   },
   "br-sugarloaf": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/P%C3%A3o_de_A%C3%A7ucar_-_Sugarloaf_Mountain_-_Zuckerhut_-_2022.jpg/1280px-P%C3%A3o_de_A%C3%A7ucar_-_Sugarloaf_Mountain_-_Zuckerhut_-_2022.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:P%C3%A3o_de_A%C3%A7ucar_-_Sugarloaf_Mountain_-_Zuckerhut_-_2022.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "artist": "Arne Müseler",
+    "license": "CC BY-SA 3.0 de",
     "title": "Pão de Açucar - Sugarloaf Mountain - Zuckerhut - 2022"
   },
   "co-cocora": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Valle_del_cocora_-_general_view.jpg/1280px-Valle_del_cocora_-_general_view.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Valle_del_cocora_-_general_view.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:Valle_del_cocora_-_general_view.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "artist": "Angela Calle and Daniel Di Palma",
+    "license": "CC BY-SA 4.0",
     "title": "Valle del cocora - general view"
   },
   "cl-moai": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/AhuTongariki.JPG/1280px-AhuTongariki.JPG",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/50/AhuTongariki.JPG",
     "source": "https://commons.wikimedia.org/wiki/File:AhuTongariki.JPG",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "artist": "Ian Sewell",
+    "license": "CC BY 2.5",
     "title": "AhuTongariki"
   },
   "cl-valleluna": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Valle_della_Luna_01.jpg/1280px-Valle_della_Luna_01.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:Valle_della_Luna_01.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "artist": "Davide guallini",
+    "license": "CC BY-SA 3.0",
     "title": "Valle della Luna 01"
   },
   "stbarts-gustavia": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Gustavia_Harbor%2C_Saint-Barth%C3%A9lemy.jpg/1280px-Gustavia_Harbor%2C_Saint-Barth%C3%A9lemy.jpg",
-    "source": "https://commons.wikimedia.org/wiki/File:Gustavia_Harbor%2C_Saint-Barth%C3%A9lemy.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Gustavia_Harbor%2C_Saint-Barth%C3%A9lemy.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Gustavia_Harbor,_Saint-Barth%C3%A9lemy.jpg",
+    "artist": "Originally uploaded at en.wikipedia by en:User:Evaneggers as en:Image:Stb.jpg",
+    "license": "CC BY-SA 3.0",
     "title": "Gustavia Harbor, Saint-Barthélemy"
   },
   "bw-okavango": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Okavango_Delta%2C_Botswana1.jpg/1280px-Okavango_Delta%2C_Botswana1.jpg",
-    "source": "https://commons.wikimedia.org/wiki/File:Okavango_Delta%2C_Botswana1.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "source": "https://commons.wikimedia.org/wiki/File:Okavango_Delta,_Botswana1.jpg",
+    "artist": "Joachim Huber",
+    "license": "CC BY-SA 2.0",
     "title": "Okavango Delta, Botswana1"
   },
   "bw-vicfalls": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Cataratas_Victoria%2C_Zambia-Zimbabue%2C_2018-07-27%2C_DD_04.jpg/1280px-Cataratas_Victoria%2C_Zambia-Zimbabue%2C_2018-07-27%2C_DD_04.jpg",
-    "source": "https://commons.wikimedia.org/wiki/File:Cataratas_Victoria%2C_Zambia-Zimbabue%2C_2018-07-27%2C_DD_04.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "source": "https://commons.wikimedia.org/wiki/File:Cataratas_Victoria,_Zambia-Zimbabue,_2018-07-27,_DD_04.jpg",
+    "artist": "Diego Delso",
+    "license": "CC BY-SA 4.0",
     "title": "Cataratas Victoria, Zambia-Zimbabue, 2018-07-27, DD 04"
   },
   "na-deadvlei": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Dead_Vlei_4.jpg/1280px-Dead_Vlei_4.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:Dead_Vlei_4.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "artist": "Ikiwaner",
+    "license": "GFDL 1.2",
     "title": "Dead Vlei 4"
   },
   "ma-ergchebbi": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Merzouga_Dunes_2011.jpg/1280px-Merzouga_Dunes_2011.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:Merzouga_Dunes_2011.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "artist": "Bjørn Christian Tørrissen",
+    "license": "CC BY-SA 3.0",
     "title": "Merzouga Dunes 2011"
   },
   "ma-aitbenhaddou": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Ksar_A%C3%AFt_Benhaddou%2C_Marocco_%28%D8%A3%D9%8A%D8%AA_%D8%A8%D9%86_%D8%AD%D8%AF%D9%88%D8%8C_%D8%A7%D9%84%D9%85%D8%BA%D8%B1%D8%A8%2C_%E2%B4%B0%E2%B5%A2%E2%B5%9C_%E2%B5%83%E2%B4%B0%E2%B4%B7%E2%B4%B7%E2%B5%93%29.jpg/1280px-Ksar_A%C3%AFt_Benhaddou%2C_Marocco_%28%D8%A3%D9%8A%D8%AA_%D8%A8%D9%86_%D8%AD%D8%AF%D9%88%D8%8C_%D8%A7%D9%84%D9%85%D8%BA%D8%B1%D8%A8%2C_%E2%B4%B0%E2%B5%A2%E2%B5%9C_%E2%B5%83%E2%B4%B0%E2%B4%B7%E2%B4%B7%E2%B5%93%29.jpg",
-    "source": "https://commons.wikimedia.org/wiki/File:Ksar_A%C3%AFt_Benhaddou%2C_Marocco_%28%D8%A3%D9%8A%D8%AA_%D8%A8%D9%86_%D8%AD%D8%AF%D9%88%D8%8C_%D8%A7%D9%84%D9%85%D8%BA%D8%B1%D8%A8%2C_%E2%B4%B0%E2%B5%A2%E2%B5%9C_%E2%B5%83%E2%B4%B0%E2%B4%B7%E2%B4%B7%E2%B5%93%29.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "source": "https://commons.wikimedia.org/wiki/File:Ksar_A%C3%AFt_Benhaddou,_Marocco_(%D8%A3%D9%8A%D8%AA_%D8%A8%D9%86_%D8%AD%D8%AF%D9%88%D8%8C_%D8%A7%D9%84%D9%85%D8%BA%D8%B1%D8%A8,_%E2%B4%B0%E2%B5%A2%E2%B5%9C_%E2%B5%83%E2%B4%B0%E2%B4%B7%E2%B4%B7%E2%B5%93).jpg",
+    "artist": "Petar Milošević",
+    "license": "CC BY-SA 4.0",
     "title": "Ksar Aït Benhaddou, Marocco (أيت بن حدو، المغرب, ⴰⵢⵜ ⵃⴰⴷⴷⵓ)"
   },
   "is-jokulsarlon": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/J%C3%B6kuls%C3%A1rl%C3%B3n_lagoon_in_southeastern_Iceland.jpg/1280px-J%C3%B6kuls%C3%A1rl%C3%B3n_lagoon_in_southeastern_Iceland.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:J%C3%B6kuls%C3%A1rl%C3%B3n_lagoon_in_southeastern_Iceland.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "artist": "Molechaser",
+    "license": "CC BY-SA 2.0",
     "title": "Jökulsárlón lagoon in southeastern Iceland"
   },
   "is-kirkjufell": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Kirkjufell_in_Iceland.jpg/1280px-Kirkjufell_in_Iceland.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:Kirkjufell_in_Iceland.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "artist": "Anjali Kiggal",
+    "license": "CC BY-SA 4.0",
     "title": "Kirkjufell in Iceland"
   },
   "ch-matterhorn": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Matterhorn_from_Domh%C3%BCtte_-_2.jpg/1280px-Matterhorn_from_Domh%C3%BCtte_-_2.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:Matterhorn_from_Domh%C3%BCtte_-_2.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "artist": "Photo: chil, on Camptocamp.org",
+    "license": "CC BY-SA 3.0",
     "title": "Matterhorn from Domhütte - 2"
   },
   "ch-glacierexpress": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/CH_Landwasser_2.jpg/1280px-CH_Landwasser_2.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:CH_Landwasser_2.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "artist": "Daniel Schwen",
+    "license": "CC BY-SA 2.5",
     "title": "CH Landwasser 2"
   },
   "mu-lemorne": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Le_Morne_Peninsula_in_Mauritius_%2853697779236%29.jpg/1280px-Le_Morne_Peninsula_in_Mauritius_%2853697779236%29.jpg",
-    "source": "https://commons.wikimedia.org/wiki/File:Le_Morne_Peninsula_in_Mauritius_%2853697779236%29.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "source": "https://commons.wikimedia.org/wiki/File:Le_Morne_Peninsula_in_Mauritius_(53697779236).jpg",
+    "artist": "\"dronepicr\"",
+    "license": "CC BY 2.0",
     "title": "Le Morne Peninsula in Mauritius (53697779236)"
   },
   "mu-chamarel": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/2006-10-02_Chamarel_Waterfalls.jpg/1280px-2006-10-02_Chamarel_Waterfalls.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:2006-10-02_Chamarel_Waterfalls.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "artist": "Hansueli Krapf",
+    "license": "CC BY-SA 3.0",
     "title": "2006-10-02 Chamarel Waterfalls"
   },
   "na-etosha": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Dust_Cloud_in_Etosha_National_Park.jpg/1280px-Dust_Cloud_in_Etosha_National_Park.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:Dust_Cloud_in_Etosha_National_Park.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "artist": "Yathin S Krishnappa",
+    "license": "CC BY-SA 3.0",
     "title": "Dust Cloud in Etosha National Park"
   },
   "oman-nizwa": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Nizwa_%285%29.jpg/1280px-Nizwa_%285%29.jpg",
-    "source": "https://commons.wikimedia.org/wiki/File:Nizwa_%285%29.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "source": "https://commons.wikimedia.org/wiki/File:Nizwa_(5).jpg",
+    "artist": "Andries Oudshoorn",
+    "license": "CC BY-SA 2.0",
     "title": "Nizwa (5)"
   },
   "indo-bali-temple": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Pura_Ulun_Danu_Bratan%2C_2022.jpg/1280px-Pura_Ulun_Danu_Bratan%2C_2022.jpg",
-    "source": "https://commons.wikimedia.org/wiki/File:Pura_Ulun_Danu_Bratan%2C_2022.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "source": "https://commons.wikimedia.org/wiki/File:Pura_Ulun_Danu_Bratan,_2022.jpg",
+    "artist": "LukeTriton",
+    "license": "CC BY-SA 4.0",
     "title": "Pura Ulun Danu Bratan, 2022"
   },
   "saudi-alula": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Al_Ula_%286748577917%29.jpg/1280px-Al_Ula_%286748577917%29.jpg",
-    "source": "https://commons.wikimedia.org/wiki/File:Al_Ula_%286748577917%29.jpg",
-    "artist": "See Wikimedia Commons",
-    "license": "license on file page",
+    "source": "https://commons.wikimedia.org/wiki/File:Al_Ula_(6748577917).jpg",
+    "artist": "Sammy Six",
+    "license": "CC BY 2.0",
     "title": "Al Ula (6748577917)"
   }
 };
