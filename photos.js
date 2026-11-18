@@ -615,5 +615,89 @@ const PHOTOS = {
     "artist": "Sammy Six",
     "license": "CC BY 2.0",
     "title": "Al Ula (6748577917)"
+  },
+  "danum-orangutan": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Tanjung_Puting30477.jpg/1280px-Tanjung_Puting30477.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Tanjung_Puting30477.jpg",
+    "artist": "Nanosanchez",
+    "license": "CC BY-SA 4.0",
+    "title": "Tanjung Puting30477"
+  },
+  "penang-georgetown": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Skyline_of_George_Town%2C_Penang_at_night_Nov2024-29-17.jpg/1280px-Skyline_of_George_Town%2C_Penang_at_night_Nov2024-29-17.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Skyline_of_George_Town,_Penang_at_night_Nov2024-29-17.jpg",
+    "artist": "HundenvonPenang",
+    "license": "CC BY-SA 4.0",
+    "title": "Skyline of George Town, Penang at night Nov2024-29-17"
+  },
+  "bali-ricefields": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Ubud_%2849818456887%29.jpg/1280px-Ubud_%2849818456887%29.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Ubud_(49818456887).jpg",
+    "artist": "Jorge Franganillo",
+    "license": "CC BY 2.0",
+    "title": "Ubud (49818456887)"
+  },
+  "punta-del-este": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/4/47/%D0%9F%D1%83%D0%BD%D1%82%D0%B0-%D0%B4%D0%B5%D0%BB%D1%8C-%D0%AD%D1%81%D1%82%D0%B5.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:%D0%9F%D1%83%D0%BD%D1%82%D0%B0-%D0%B4%D0%B5%D0%BB%D1%8C-%D0%AD%D1%81%D1%82%D0%B5.jpg",
+    "artist": "Марсело Кампи",
+    "license": "CC BY-SA 3.0",
+    "title": "Пунта-дель-Эсте"
+  },
+  "buenos-aires-recoleta": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/9/95/Recoleta_montage.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Recoleta_montage.jpg",
+    "artist": "Bleff",
+    "license": "CC BY-SA 3.0",
+    "title": "Recoleta montage"
+  },
+  "amazon-tambopata": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/PuertoMaldonado_LagoSandoval3.jpg/1280px-PuertoMaldonado_LagoSandoval3.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:PuertoMaldonado_LagoSandoval3.jpg",
+    "artist": "Håkan Svensson (Xauxa)",
+    "license": "CC BY 2.5",
+    "title": "PuertoMaldonado LagoSandoval3"
+  },
+  "alhambra": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Dawn_Charles_V_Palace_Alhambra_Granada_Andalusia_Spain.jpg/1280px-Dawn_Charles_V_Palace_Alhambra_Granada_Andalusia_Spain.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Dawn_Charles_V_Palace_Alhambra_Granada_Andalusia_Spain.jpg",
+    "artist": "Jebulon",
+    "license": "CC0",
+    "title": "Dawn Charles V Palace Alhambra Granada Andalusia Spain"
+  },
+  "seville-plaza": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Plaza_de_Espa%C3%B1a_%28Sevilla%29_-_01.jpg/1280px-Plaza_de_Espa%C3%B1a_%28Sevilla%29_-_01.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Plaza_de_Espa%C3%B1a_(Sevilla)_-_01.jpg",
+    "artist": "Carlos Delgado",
+    "license": "CC BY-SA 4.0",
+    "title": "Plaza de España (Sevilla) - 01"
+  },
+  "teide": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Roque_Cinchado_und_Teide.jpg/1280px-Roque_Cinchado_und_Teide.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Roque_Cinchado_und_Teide.jpg",
+    "artist": "Thomas Wolf, www.foto-tw.de",
+    "license": "CC BY-SA 3.0 de",
+    "title": "Roque Cinchado und Teide"
+  },
+  "san-sebastian": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/San_Sebasti%C3%A1n_-_Ayuntamiento_10.jpg/1280px-San_Sebasti%C3%A1n_-_Ayuntamiento_10.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:San_Sebasti%C3%A1n_-_Ayuntamiento_10.jpg",
+    "artist": "Zarateman",
+    "license": "CC0",
+    "title": "San Sebastián - Ayuntamiento 10"
+  },
+  "acropolis": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/1029_Acropolis_of_Athens_in_Greece_at_night_Photo_by_Giles_Laurent.jpg/1280px-1029_Acropolis_of_Athens_in_Greece_at_night_Photo_by_Giles_Laurent.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:1029_Acropolis_of_Athens_in_Greece_at_night_Photo_by_Giles_Laurent.jpg",
+    "artist": "Giles Laurent",
+    "license": "CC BY-SA 4.0",
+    "title": "1029 Acropolis of Athens in Greece at night Photo by Giles Laurent"
+  },
+  "navarino-bay": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Pylos-sfaktiria.JPG/1280px-Pylos-sfaktiria.JPG",
+    "source": "https://commons.wikimedia.org/wiki/File:Pylos-sfaktiria.JPG",
+    "artist": "Flyax",
+    "license": "CC BY-SA 3.0",
+    "title": "Pylos-sfaktiria"
   }
 };
