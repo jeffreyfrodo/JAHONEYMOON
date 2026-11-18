@@ -21,13 +21,6 @@ const PHOTOS = {
     "license": "CC BY-SA 2.5",
     "title": "Maldives-resort-island"
   },
-  "doha-museum": {
-    "url": "https://upload.wikimedia.org/wikipedia/en/thumb/c/c7/Museum_of_Islamic_Art_in_Doha%2C_Qatar_%2832673171432%29.jpg/1280px-Museum_of_Islamic_Art_in_Doha%2C_Qatar_%2832673171432%29.jpg",
-    "source": "https://en.wikipedia.org/wiki/File:Museum_of_Islamic_Art_in_Doha,_Qatar_(32673171432).jpg",
-    "artist": "Ralf Steinberger from Milan, Berlin + Munich, Italy + Germany",
-    "license": "CC BY 2.0",
-    "title": "Museum of Islamic Art in Doha, Qatar (32673171432)"
-  },
   "bhutan-tigers-nest": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Paro_Taktsang%2C_Bhutan_%28edited%29.jpg/1280px-Paro_Taktsang%2C_Bhutan_%28edited%29.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:Paro_Taktsang,_Bhutan_(edited).jpg",
@@ -77,13 +70,6 @@ const PHOTOS = {
     "license": "CC BY 2.0",
     "title": "DSC00042 Polynésia Mooréa Island Motu Moéa Lagoon and transportation Boat (8076082190)"
   },
-  "tetiaroa": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Tetiaroa_from_sky.JPG/1280px-Tetiaroa_from_sky.JPG",
-    "source": "https://commons.wikimedia.org/wiki/File:Tetiaroa_from_sky.JPG",
-    "artist": "Supertoff",
-    "license": "CC BY-SA 3.0",
-    "title": "Tetiaroa from sky"
-  },
   "antarctica-lemaire": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Icebergs_in_the_Lemaire_Channel%2C_Antarctica.jpg/1280px-Icebergs_in_the_Lemaire_Channel%2C_Antarctica.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:Icebergs_in_the_Lemaire_Channel,_Antarctica.jpg",
@@ -126,13 +112,6 @@ const PHOTOS = {
     "license": "CC BY 2.0",
     "title": "El Chaltén"
   },
-  "mendoza-vineyard": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Vineyard_in_Mendoza%2C_Argentina.jpg/1280px-Vineyard_in_Mendoza%2C_Argentina.jpg",
-    "source": "https://commons.wikimedia.org/wiki/File:Vineyard_in_Mendoza,_Argentina.jpg",
-    "artist": "David",
-    "license": "CC BY 2.0",
-    "title": "Vineyard in Mendoza, Argentina"
-  },
   "milford-sound": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Milford_Sound_%28New_Zealand%29.JPG/1280px-Milford_Sound_%28New_Zealand%29.JPG",
     "source": "https://commons.wikimedia.org/wiki/File:Milford_Sound_(New_Zealand).JPG",
@@ -146,13 +125,6 @@ const PHOTOS = {
     "artist": "Bernard Spragg. NZ from Christchurch, New Zealand",
     "license": "CC0",
     "title": "Queenstown 1 (8168013172)"
-  },
-  "aoraki": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Aoraki_Mount_Cook.JPG/1280px-Aoraki_Mount_Cook.JPG",
-    "source": "https://commons.wikimedia.org/wiki/File:Aoraki_Mount_Cook.JPG",
-    "artist": "C.M. Lynch",
-    "license": "CC BY-SA 3.0",
-    "title": "Aoraki Mount Cook"
   },
   "sydney-opera": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Sydney_Opera_House_2026.jpg/1280px-Sydney_Opera_House_2026.jpg",
@@ -252,20 +224,6 @@ const PHOTOS = {
     "license": "CC BY-SA 3.0",
     "title": "Cheetah with cubs"
   },
-  "petra-khazneh": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Al_khazneh.jpg/1280px-Al_khazneh.jpg",
-    "source": "https://commons.wikimedia.org/wiki/File:Al_khazneh.jpg",
-    "artist": "Susanahajer",
-    "license": "CC BY-SA 3.0",
-    "title": "Al khazneh"
-  },
-  "wadi-rum": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Mountain_in_Wadi_Rum%2C_Jordan.jpg/1280px-Mountain_in_Wadi_Rum%2C_Jordan.jpg",
-    "source": "https://commons.wikimedia.org/wiki/File:Mountain_in_Wadi_Rum,_Jordan.jpg",
-    "artist": "Daniel Case",
-    "license": "CC BY-SA 3.0",
-    "title": "Mountain in Wadi Rum, Jordan"
-  },
   "giza": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Pyramids_of_the_Giza_Necropolis.jpg/1280px-Pyramids_of_the_Giza_Necropolis.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:Pyramids_of_the_Giza_Necropolis.jpg",
@@ -280,34 +238,6 @@ const PHOTOS = {
     "license": "CC BY-SA 3.0",
     "title": "Balloon over Luxor - Egypt denoised"
   },
-  "udaipur-lake-palace": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Udaipur_Lake_Palace.jpg/1280px-Udaipur_Lake_Palace.jpg",
-    "source": "https://commons.wikimedia.org/wiki/File:Udaipur_Lake_Palace.jpg",
-    "artist": "user:Flicka",
-    "license": "CC BY-SA 3.0",
-    "title": "Udaipur Lake Palace"
-  },
-  "mehrangarh": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/9/99/Mehrangarh_Fort_sanhita.jpg",
-    "source": "https://commons.wikimedia.org/wiki/File:Mehrangarh_Fort_sanhita.jpg",
-    "artist": "Sanhitasinha",
-    "license": "CC BY-SA 4.0",
-    "title": "Mehrangarh Fort sanhita"
-  },
-  "ranthambore-tiger": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/1/17/Tiger_from_Ranthanbore_Sawai_Madhopur_Rajasthan_India_12.10.2014.jpg",
-    "source": "https://commons.wikimedia.org/wiki/File:Tiger_from_Ranthanbore_Sawai_Madhopur_Rajasthan_India_12.10.2014.jpg",
-    "artist": "Dibyendu Ash",
-    "license": "CC BY-SA 3.0",
-    "title": "Tiger from Ranthanbore Sawai Madhopur Rajasthan India 12.10.2014"
-  },
-  "jaisalmer": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Jaisalmer_forteresse.jpg/1280px-Jaisalmer_forteresse.jpg",
-    "source": "https://commons.wikimedia.org/wiki/File:Jaisalmer_forteresse.jpg",
-    "artist": "Gérard Janot",
-    "license": "CC BY-SA 3.0",
-    "title": "Jaisalmer forteresse"
-  },
   "sigiriya": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Sigiriya_%28141688197%29.jpeg/1280px-Sigiriya_%28141688197%29.jpeg",
     "source": "https://commons.wikimedia.org/wiki/File:Sigiriya_(141688197).jpeg",
@@ -321,13 +251,6 @@ const PHOTOS = {
     "artist": "Deitel55",
     "license": "CC BY-SA 3.0",
     "title": "NineArchesBridge"
-  },
-  "yala-leopard": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Sri_Lankan_leopard_%28Panthera_pardus_kotiya%29_female_5.jpg/1280px-Sri_Lankan_leopard_%28Panthera_pardus_kotiya%29_female_5.jpg",
-    "source": "https://commons.wikimedia.org/wiki/File:Sri_Lankan_leopard_(Panthera_pardus_kotiya)_female_5.jpg",
-    "artist": "Charles J. Sharp",
-    "license": "CC BY-SA 4.0",
-    "title": "Sri Lankan leopard (Panthera pardus kotiya) female 5"
   },
   "tea-estates": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Sri_Lanka%2C_Tea_plantations%2C_Nuwara_Eliya.jpg/1280px-Sri_Lanka%2C_Tea_plantations%2C_Nuwara_Eliya.jpg",
@@ -490,20 +413,6 @@ const PHOTOS = {
     "license": "CC BY-SA 4.0",
     "title": "Chitwan swamp"
   },
-  "kerala-houseboat": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/House_Boat_DSW.jpg/1280px-House_Boat_DSW.jpg",
-    "source": "https://commons.wikimedia.org/wiki/File:House_Boat_DSW.jpg",
-    "artist": "Augustus Binu : flickr",
-    "license": "CC BY-SA 3.0",
-    "title": "House Boat DSW"
-  },
-  "kerala-munnar": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Munnar_Overview.jpg/1280px-Munnar_Overview.jpg",
-    "source": "https://commons.wikimedia.org/wiki/File:Munnar_Overview.jpg",
-    "artist": "Kondephy",
-    "license": "CC BY-SA 4.0",
-    "title": "Munnar Overview"
-  },
   "oman-jebelakhdar": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Jebel_Akhdar_view.jpg/1280px-Jebel_Akhdar_view.jpg",
     "source": "https://commons.wikimedia.org/wiki/File:Jebel_Akhdar_view.jpg",
@@ -517,13 +426,6 @@ const PHOTOS = {
     "artist": "A.Savin",
     "license": "FAL",
     "title": "La Digue asv2024-10 img22 Union Estate"
-  },
-  "dubai-burj": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Burj_Khalifa_%28worlds_tallest_building%29_and_the_Dubai_skyline_%2825781049892%29.jpg/1280px-Burj_Khalifa_%28worlds_tallest_building%29_and_the_Dubai_skyline_%2825781049892%29.jpg",
-    "source": "https://commons.wikimedia.org/wiki/File:Burj_Khalifa_(worlds_tallest_building)_and_the_Dubai_skyline_(25781049892).jpg",
-    "artist": "imran shahabuddin",
-    "license": "CC BY 2.0",
-    "title": "Burj Khalifa (worlds tallest building) and the Dubai skyline (25781049892)"
   },
   "aus-wineglass": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Wineglass_Bay_view_from_the_Beach.jpg/1280px-Wineglass_Bay_view_from_the_Beach.jpg",
@@ -573,20 +475,6 @@ const PHOTOS = {
     "artist": "Mundo Maya",
     "license": "CC BY-SA 4.0",
     "title": "Tikal 3"
-  },
-  "mx-montealban": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Monte_Alban_West_Side_Platform.jpg/1280px-Monte_Alban_West_Side_Platform.jpg",
-    "source": "https://commons.wikimedia.org/wiki/File:Monte_Alban_West_Side_Platform.jpg",
-    "artist": "nsaum75 !Dígame¡‎",
-    "license": "CC BY-SA 3.0",
-    "title": "Monte Alban West Side Platform"
-  },
-  "mx-hierve": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/4/43/HierveElAguaMexico1.jpg",
-    "source": "https://commons.wikimedia.org/wiki/File:HierveElAguaMexico1.jpg",
-    "artist": "The original uploader was Lavintzin at English Wikipedia.",
-    "license": "CC BY-SA 2.5",
-    "title": "HierveElAguaMexico1"
   },
   "br-iguazu": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Aerial_Foz_de_Igua%C3%A7u_26_Nov_2005.jpg/1280px-Aerial_Foz_de_Igua%C3%A7u_26_Nov_2005.jpg",
@@ -671,13 +559,6 @@ const PHOTOS = {
     "artist": "Molechaser",
     "license": "CC BY-SA 2.0",
     "title": "Jökulsárlón lagoon in southeastern Iceland"
-  },
-  "is-kirkjufell": {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Kirkjufell_in_Iceland.jpg/1280px-Kirkjufell_in_Iceland.jpg",
-    "source": "https://commons.wikimedia.org/wiki/File:Kirkjufell_in_Iceland.jpg",
-    "artist": "Anjali Kiggal",
-    "license": "CC BY-SA 4.0",
-    "title": "Kirkjufell in Iceland"
   },
   "ch-matterhorn": {
     "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Matterhorn_from_Domh%C3%BCtte_-_2.jpg/1280px-Matterhorn_from_Domh%C3%BCtte_-_2.jpg",

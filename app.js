@@ -158,6 +158,17 @@ function budget(d) {
 
 // ---------- scoring ----------
 
+function hasSplurge(d) {
+  return d.stops.some(([, nights, ids]) =>
+    nights >= 5 && ids.some((id) => HOTELS[id].program === "marriott" && HOTELS[id].rate >= SPLURGE_MIN_RATE));
+}
+
+function splurgeTag(d) {
+  return hasSplurge(d)
+    ? el("span", { class: "splurge-tag yes", text: "Marriott splurge" })
+    : el("span", { class: "splurge-tag", text: "No Marriott splurge" });
+}
+
 function match(scores, weights) {
   let total = 0;
   let max = 0;
@@ -174,8 +185,8 @@ function ranked() {
     const scores = { ...d.scores, points: b.pointsScore };
     const a = match(scores, state.weights.a);
     const bb = match(scores, state.weights.b);
-    return { d, budget: b, scores, a, b: bb, both: (a + bb) / 2 };
-  }).sort((x, y) => y.both - x.both);
+    return { d, budget: b, scores, a, b: bb, both: (a + bb) / 2, splurge: hasSplurge(d) };
+  }).sort((x, y) => y.splurge - x.splurge || y.both - x.both);
 }
 
 function isShortlisted(id) {
@@ -283,7 +294,7 @@ function renderBoard(rows) {
   );
   const body = rows.map((r, i) => el("tr", { class: isShortlisted(r.d.id) ? "is-short" : "" },
     el("td", { class: "num rank", text: i + 1 }),
-    el("td", { class: "left trip" }, el("a", { href: `#${r.d.id}`, text: r.d.name }), el("span", { class: "board-region", text: r.d.region })),
+    el("td", { class: "left trip" }, el("a", { href: `#${r.d.id}`, text: r.d.name }), el("span", { class: "board-region", text: r.d.region }), splurgeTag(r.d)),
     el("td", { class: "num strong", text: pct(r.both) }),
     el("td", { class: "num col-a", text: pct(r.a) }),
     el("td", { class: "num col-b", text: pct(r.b) }),
@@ -418,7 +429,7 @@ function buildCard(d) {
     el("div", { class: "card-body" },
       el("div", { class: "card-top" },
         el("div", { class: "title-block" },
-          el("span", { class: "eyebrow-row" }, node.rank, el("span", { class: "region-tag", text: d.region })),
+          el("span", { class: "eyebrow-row" }, node.rank, el("span", { class: "region-tag", text: d.region }), splurgeTag(d)),
           el("h3", { text: d.name }),
           el("p", { class: "tagline", text: d.tagline })),
         el("div", { class: "match" }, node.scoreBoth, el("span", { class: "match-label", text: "match" }), el("div", { class: "match-split" }, node.scoreA, node.scoreB))),

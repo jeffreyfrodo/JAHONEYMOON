@@ -46,6 +46,10 @@ const AIRLINES = {
   skymiles: { label: "SkyMiles", ratio: 1 },
 };
 
+// A trip has a Marriott splurge when one stop of 5+ nights offers a Marriott
+// hotel at or above this many points per night. Those trips rank first.
+const SPLURGE_MIN_RATE = 50000;
+
 // Days before departure that award inventory typically opens (approximate).
 const BOOKING_WINDOWS = [
   { program: "Hyatt (via Chase)", days: 395 },

@@ -270,6 +270,8 @@ main.wrap > *, .cards > * { min-width: 0; }
 /* card eyebrow */
 .eyebrow-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: baseline; }
 .region-tag { font-size: 0.75rem; color: var(--muted); }
+.splurge-tag { font-size: 0.7rem; color: var(--muted); }
+.splurge-tag.yes { color: var(--good); font-weight: 600; }
 
 /* where to stay */
 .where { display: grid; gap: 10px; border-top: 1px solid var(--line); padding-top: 16px; }
