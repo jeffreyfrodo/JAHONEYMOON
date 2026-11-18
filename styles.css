@@ -140,6 +140,16 @@ main.wrap > *, .cards > * { min-width: 0; }
 .pts.ok { color: var(--good); }
 .pts.short { color: var(--warn); }
 
+/* points feasibility */
+.feas td { vertical-align: top; }
+.board.feas .trip { display: table-cell; white-space: normal; min-width: 9rem; }
+.feas .num { font-family: var(--mono); font-size: 0.8rem; text-align: right; }
+.feas .num.over { color: var(--warn); font-weight: 600; }
+.feas-flights { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; white-space: normal; min-width: 16rem; }
+.feas-flights li { display: grid; }
+.feas-via, .feas-max { color: var(--muted); font-size: 0.75rem; }
+.feas .pts { white-space: normal; min-width: 10rem; }
+
 /* cards */
 .cards { display: grid; gap: 28px; }
 .card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; scroll-margin-top: 16px; }

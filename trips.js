@@ -1,6 +1,7 @@
 // Every trip. Stops are [place, nights, [hotel ids from hotels.js]]; the first
-// hotel is the default choice. Flights are [label, wallet, amount] where wallet
-// is a WALLETS id or "cash" (amount in USD for two). `extras` is the cash range
+// hotel is the default choice. Flights are [label, wallet, amount, airline]:
+// wallet is a WALLETS id or "cash", amount is airline miles for two (or USD
+// for two when cash), and airline is an AIRLINES id (omitted for cash). `extras` is the cash range
 // for two for everything that isn't lodging: transfers, park fees, permits,
 // guides, internal flights and meals at non-inclusive hotels.
 
@@ -22,7 +23,7 @@ const DESTINATIONS = [
     highlights: ["Whale sharks in South Ari Atoll year-round", "Two resorts nearly free on points", "A desert and souq stopover in Doha"],
     watchouts: ["The least novel option for seasoned travelers", "Seaplanes run $1,500–2,000 per person and aren't covered by points"],
     hours: "~20h, one stop in Doha",
-    flights: [["Qatar Qsuites business, round trip for two (Avios)", "amex", 360000]],
+    flights: [["Qatar Qsuites business, round trip for two (Avios)", "amex", 360000, "avios"]],
     extras: [6000, 12000],
     stops: [
       ["Doha", 2, ["w-doha", "st-regis-doha"]],
@@ -44,7 +45,7 @@ const DESTINATIONS = [
     highlights: ["Anse Source d'Argent on La Digue", "Aldabra giant tortoises and empty beaches", "Waldorf Astoria's private atoll on Hilton points"],
     watchouts: ["Some rain in December", "Inter-island flights and boats add cost"],
     hours: "~20h, one stop in Doha or Dubai",
-    flights: [["Qatar Qsuites business to Mahé, via Dubai stopover (Avios)", "amex", 360000]],
+    flights: [["Qatar Qsuites business to Mahé, via Dubai stopover (Avios)", "amex", 360000, "avios"]],
     extras: [4000, 8000],
     stops: [
       ["Dubai desert", 2, ["al-maha", "ph-dubai"]],
@@ -66,7 +67,7 @@ const DESTINATIONS = [
     highlights: ["Two Marriott resorts at Le Morne for points", "Swim with dolphins off Tamarin", "Easy to combine with Cape Town or Dubai"],
     watchouts: ["Least adventurous Indian Ocean option", "Long flights for a beach trip"],
     hours: "~22h, one stop in Dubai or Doha",
-    flights: [["Emirates or Qatar business (Avios)", "amex", 360000]],
+    flights: [["Emirates or Qatar business (Avios)", "amex", 360000, "avios"]],
     extras: [4000, 7000],
     stops: [
       ["Dubai", 2, ["ph-dubai", "al-maha"]],
@@ -92,7 +93,7 @@ const DESTINATIONS = [
     highlights: ["The hike to Tiger's Nest, on a 900m cliff", "Few visitors because of Bhutan's daily tourism fee", "Mountain monasteries one week, a lagoon the next"],
     watchouts: ["Bhutan's tourism fee is $100 per person per night (check the 2027 rate)", "Druk Air seats are scarce and paid in cash", "Four flights each way"],
     hours: "~24h, via Doha + Kathmandu or Delhi",
-    flights: [["Qatar business to Kathmandu, home from Malé (Avios)", "amex", 360000]],
+    flights: [["Qatar business to Kathmandu, home from Malé (Avios)", "amex", 360000, "avios"]],
     extras: [10000, 15000],
     stops: [
       ["Paro & Thimphu", 3, ["le-meridien-paro", "como-uma-paro", "six-senses-bhutan", "amankora"]],
@@ -117,7 +118,7 @@ const DESTINATIONS = [
     highlights: ["Nights in real palaces: Umaid Bhawan, Lake Palace, a hilltop fort", "Hyatt and Marriott points stretch far in India", "Tiger safaris among the ruins of Ranthambore fort"],
     watchouts: ["Delhi's air quality is poor in December; keep that stop short", "Crowds and noise between the calm palace stays"],
     hours: "~14h nonstop (Air India or United to Delhi)",
-    flights: [["Air India or United business to Delhi (Aeroplan)", "amex", 320000]],
+    flights: [["Air India or United business to Delhi (Aeroplan)", "amex", 320000, "aeroplan"]],
     extras: [3000, 6000],
     stops: [
       ["Delhi", 1, ["andaz-delhi", "the-lodhi"]],
@@ -141,7 +142,7 @@ const DESTINATIONS = [
     highlights: ["Overnight on a kettuvallam with your own cook", "Seafood and Syrian-Christian, Malabar and Goan cooking", "Ayurvedic spa treatments"],
     watchouts: ["Goa is busy over Christmas and New Year", "Slow roads between Kochi, Munnar and the backwaters"],
     hours: "~20h, one stop in Doha",
-    flights: [["Qatar business to Kochi, home from Goa (Avios)", "amex", 340000]],
+    flights: [["Qatar business to Kochi, home from Goa (Avios)", "amex", 340000, "avios"]],
     extras: [3000, 5000],
     stops: [
       ["Fort Kochi", 2, ["grand-hyatt-kochi", "brunton-boatyard"]],
@@ -166,7 +167,7 @@ const DESTINATIONS = [
     highlights: ["Highest leopard density in the world in Yala", "Weligama Bay Marriott and Hilton Yala are cheap on points", "Ceylon Tea Trails bungalows for a splurge"],
     watchouts: ["Some rain in the north and east in December", "Long road transfers; a driver is essential"],
     hours: "~20h, one stop in Doha",
-    flights: [["Qatar business to Colombo (Avios)", "amex", 360000]],
+    flights: [["Qatar business to Colombo (Avios)", "amex", 360000, "avios"]],
     extras: [3000, 5000],
     stops: [
       ["Sigiriya & Cultural Triangle", 3, ["vil-uyana", "water-garden"]],
@@ -189,7 +190,7 @@ const DESTINATIONS = [
     highlights: ["Helicopter to Kala Patthar for a champagne view of Everest", "One-horned rhinos and the chance of a tiger in Chitwan", "Pairs well with Bhutan, a short flight away"],
     watchouts: ["Altitude: no strenuous trekking unless you acclimatize", "Kathmandu traffic and dust"],
     hours: "~22h, one stop in Doha",
-    flights: [["Qatar business to Kathmandu (Avios)", "amex", 340000]],
+    flights: [["Qatar business to Kathmandu (Avios)", "amex", 340000, "avios"]],
     extras: [6000, 10000],
     stops: [
       ["Kathmandu", 3, ["hyatt-kathmandu", "kathmandu-marriott", "dwarikas"]],
@@ -213,7 +214,7 @@ const DESTINATIONS = [
     highlights: ["Park Hyatt Kyoto and Park Hyatt Niseko on Chase points", "Kaiseki dinners in a ryokan with your own hot spring", "Snow, and nothing like Tokyo"],
     watchouts: ["Japan may feel familiar if you've already been", "Niseko's snow can be thin before mid-December"],
     hours: "~13h nonstop to Tokyo or Osaka",
-    flights: [["ANA business (Virgin Atlantic points)", "amex", 240000]],
+    flights: [["ANA business (Virgin Atlantic points)", "amex", 240000, "virgin"]],
     extras: [5000, 9000],
     stops: [
       ["Kyoto", 4, ["ph-kyoto", "hyatt-regency-kyoto", "ritz-kyoto", "aman-kyoto"]],
@@ -236,7 +237,7 @@ const DESTINATIONS = [
     highlights: ["Four Seasons Tented Camp: one of the world's most romantic camps", "Island-hopping Phang Nga Bay by longtail", "Bangkok street food and tasting menus"],
     watchouts: ["Holiday weeks are crowded and expensive", "Familiar ground if you've done Southeast Asia"],
     hours: "~20h, one stop in Taipei or Tokyo",
-    flights: [["EVA or ANA business (Aeroplan)", "amex", 350000]],
+    flights: [["EVA or ANA business (Aeroplan)", "amex", 350000, "aeroplan"]],
     extras: [3000, 6000],
     stops: [
       ["Bangkok", 2, ["ph-bangkok", "capella-bangkok"]],
@@ -259,7 +260,7 @@ const DESTINATIONS = [
     highlights: ["Overnight cruise in quieter Lan Ha Bay", "Phở, bún chả and Saigon's street food", "JW Marriott Phu Quoc's whimsical design"],
     watchouts: ["Ha Long can be hazy in winter", "Domestic flights each leg"],
     hours: "~20h, one stop in Hong Kong",
-    flights: [["Cathay Pacific business (Asia Miles via Amex)", "amex", 340000]],
+    flights: [["Cathay Pacific business (Asia Miles via Amex)", "amex", 340000, "asiamiles"]],
     extras: [3000, 6000],
     stops: [
       ["Hanoi", 2, ["jw-hanoi", "metropole"]],
@@ -283,7 +284,7 @@ const DESTINATIONS = [
     highlights: ["Private temple access with Amansara", "Shinta Mani Wild, Bill Bensley's most famous camp", "Sleepy, beautiful Luang Prabang"],
     watchouts: ["Several regional flights", "Shinta Mani Wild books out early"],
     hours: "~22h, one stop in Taipei or Bangkok",
-    flights: [["EVA or Thai business (Aeroplan)", "amex", 350000]],
+    flights: [["EVA or Thai business (Aeroplan)", "amex", 350000, "aeroplan"]],
     extras: [3000, 6000],
     stops: [
       ["Siem Reap", 4, ["ph-siemreap", "raffles-angkor", "amansara"]],
@@ -306,7 +307,7 @@ const DESTINATIONS = [
     highlights: ["Raja Ampat diving and snorkeling", "Hyatt's Alila resorts are strong Chase redemptions", "Bulgari Bali and Mandapa on Marriott points"],
     watchouts: ["Rainy season in Bali", "Long journey: Raja Ampat needs two extra flights and a boat"],
     hours: "~24h, one stop in Singapore",
-    flights: [["Singapore Airlines business (KrisFlyer via Amex)", "amex", 380000]],
+    flights: [["Singapore Airlines business (KrisFlyer via Amex)", "amex", 380000, "krisflyer"]],
     extras: [5000, 9000],
     stops: [
       ["Ubud", 3, ["alila-ubud", "mandapa", "capella-ubud"]],
@@ -326,7 +327,7 @@ const DESTINATIONS = [
     highlights: ["Kayaking into the Big and Small Lagoons", "Amanpulo's beach casitas", "Some of Asia's best snorkeling"],
     watchouts: ["Very few points options", "Typhoon risk early in the month"],
     hours: "~17h nonstop to Manila",
-    flights: [["Cathay or JAL business (Avios)", "amex", 320000]],
+    flights: [["Cathay or JAL business (Avios)", "amex", 320000, "avios"]],
     extras: [4000, 7000],
     stops: [
       ["Manila", 1, ["grand-hyatt-manila"]],
@@ -352,7 +353,7 @@ const DESTINATIONS = [
     highlights: ["The Grand Egyptian Museum, fully open since late 2025", "Sailing the Nile on a small dahabiya", "Stargazing from a dome tent in Wadi Rum"],
     watchouts: ["Check State Department advisories close to booking", "Early starts at the temples"],
     hours: "~12h nonstop to Cairo",
-    flights: [["Business to Cairo, home from Amman (Aeroplan or Avios)", "amex", 300000]],
+    flights: [["Business to Cairo, home from Amman (Aeroplan or Avios)", "amex", 300000, "aeroplan"]],
     extras: [4000, 7000],
     stops: [
       ["Cairo", 2, ["mena-house", "four-seasons-cairo"]],
@@ -376,7 +377,7 @@ const DESTINATIONS = [
     highlights: ["Alila Jabal Akhdar is an easy Chase redemption", "Dune-bashing and a night in the Wahiba Sands", "Six Senses Zighy Bay in a fjord-like cove"],
     watchouts: ["Musandam is a separate exclave reached via Dubai", "Quiet nightlife; alcohol mostly in hotels"],
     hours: "~15h, one stop in Doha",
-    flights: [["Qatar business to Muscat, home from Dubai (Avios)", "amex", 300000]],
+    flights: [["Qatar business to Muscat, home from Dubai (Avios)", "amex", 300000, "avios"]],
     extras: [3000, 6000],
     stops: [
       ["Muscat", 3, ["al-bustan", "grand-hyatt-muscat", "chedi-muscat"]],
@@ -396,7 +397,7 @@ const DESTINATIONS = [
     highlights: ["Hegra, Petra's sister city, with almost no crowds", "Brand-new Red Sea resorts, two on Marriott points", "Hot-air balloons over AlUla's rock formations"],
     watchouts: ["Conservative norms and limited alcohol", "Expensive cash lodging in AlUla"],
     hours: "~15h, one stop in Doha",
-    flights: [["Qatar business to AlUla via Doha, home from Jeddah (Avios)", "amex", 300000]],
+    flights: [["Qatar business to AlUla via Doha, home from Jeddah (Avios)", "amex", 300000, "avios"]],
     extras: [4000, 7000],
     stops: [
       ["AlUla", 4, ["habitas-alula", "banyan-alula"]],
@@ -418,7 +419,7 @@ const DESTINATIONS = [
     highlights: ["Camel trek to a private dune camp", "La Mamounia and Royal Mansour", "Only 7 hours from New York"],
     watchouts: ["Few points hotels on this route", "Long drives over the Atlas"],
     hours: "~7h nonstop to Casablanca",
-    flights: [["Royal Air Maroc business (Avios)", "amex", 220000]],
+    flights: [["Royal Air Maroc business (Avios)", "amex", 220000, "avios"]],
     extras: [3000, 5000],
     stops: [
       ["Marrakech", 3, ["four-seasons-marrakech", "la-mamounia", "royal-mansour"]],
@@ -445,7 +446,7 @@ const DESTINATIONS = [
     highlights: ["Some of the world's most reliable leopard sightings", "Wine estates and tasting menus at a fraction of European prices", "Penguins at Boulders Beach and the Cape Point drive"],
     watchouts: ["Top safari lodges are cash only", "Marriott points only cover the Cape Town nights"],
     hours: "~15h nonstop (United EWR–CPT or Delta ATL–JNB)",
-    flights: [["United Polaris to Cape Town, home from Johannesburg (Aeroplan)", "amex", 340000]],
+    flights: [["United Polaris to Cape Town, home from Johannesburg (Aeroplan)", "amex", 340000, "aeroplan"]],
     extras: [4000, 8000],
     stops: [
       ["Cape Town", 4, ["westin-cape-town", "the-silo", "ellerman-house"]],
@@ -468,7 +469,7 @@ const DESTINATIONS = [
     highlights: ["Mombo, often called Africa's best game-viewing camp", "Fly between camps in light aircraft", "Victoria Falls from the Zambian and Zimbabwean sides"],
     watchouts: ["Rain and heat; some camps close roads", "Almost entirely cash"],
     hours: "~19h to Johannesburg, then a regional flight",
-    flights: [["Qatar business to Johannesburg (Avios)", "amex", 340000]],
+    flights: [["Qatar business to Johannesburg (Avios)", "amex", 340000, "avios"]],
     extras: [5000, 9000],
     stops: [
       ["Johannesburg", 1, ["protea-ortambo"]],
@@ -488,7 +489,7 @@ const DESTINATIONS = [
     highlights: ["Dawn climb of Big Daddy dune into Deadvlei", "Fly-in safari over the Skeleton Coast", "Some of the darkest skies on Earth"],
     watchouts: ["Very hot in December", "Fly-in packages are expensive"],
     hours: "~19h to Johannesburg, then 2h to Windhoek",
-    flights: [["Business to Johannesburg (Avios or Aeroplan)", "amex", 340000]],
+    flights: [["Business to Johannesburg (Avios or Aeroplan)", "amex", 340000, "aeroplan"]],
     extras: [8000, 15000],
     stops: [
       ["Windhoek", 1, ["hilton-windhoek"]],
@@ -514,7 +515,7 @@ const DESTINATIONS = [
     highlights: ["Hot-air balloon at dawn over the Serengeti", "Ngorongoro Crater: Big Five in a day", "Stone Town, then a private island off Zanzibar"],
     watchouts: ["Afternoon showers likely in early December", "High park fees"],
     hours: "~19h, one stop in Doha",
-    flights: [["Qatar business to Kilimanjaro, home from Zanzibar (Avios)", "amex", 340000]],
+    flights: [["Qatar business to Kilimanjaro, home from Zanzibar (Avios)", "amex", 340000, "avios"]],
     extras: [6000, 10000],
     stops: [
       ["Arusha", 1, ["four-points-arusha", "legendary-lodge"]],
@@ -539,7 +540,7 @@ const DESTINATIONS = [
     highlights: ["Gorilla trekking: one of the most moving wildlife encounters on Earth", "The Ritz-Carlton Masai Mara on Marriott points", "Breakfast with giraffes at Giraffe Manor"],
     watchouts: ["Gorilla permits are $1,500 per person; steep, muddy trails", "Topping up Marriott from Amex is poor value"],
     hours: "~20h, one stop in Doha",
-    flights: [["Qatar business to Kigali, home from Nairobi (Avios)", "amex", 340000]],
+    flights: [["Qatar business to Kigali, home from Nairobi (Avios)", "amex", 340000, "avios"]],
     extras: [6000, 9000],
     stops: [
       ["Kigali", 1, ["kigali-marriott"]],
@@ -567,8 +568,8 @@ const DESTINATIONS = [
     watchouts: ["Humpback season (Jul–Nov) is over by December", "Dining off-resort is limited and pricey"],
     hours: "~8h nonstop from LAX",
     flights: [
-      ["Air France or Air Tahiti Nui business LAX–Papeete (Flying Blue)", "amex", 340000],
-      ["Positioning flights to LAX for two", "delta", 50000],
+      ["Air France or Air Tahiti Nui business LAX–Papeete (Flying Blue)", "amex", 340000, "flyingblue"],
+      ["Positioning flights to LAX for two", "delta", 50000, "skymiles"],
     ],
     extras: [5000, 9000],
     stops: [
@@ -593,7 +594,7 @@ const DESTINATIONS = [
     highlights: ["Overnight cruise on Milford or Doubtful Sound", "Helicopter to a glacier landing", "Sydney's New Year's Eve fireworks if your dates include Dec 31"],
     watchouts: ["December business seats to the South Pacific are the hardest awards to find", "13–15h flights and a big time-zone shift"],
     hours: "~13h nonstop from the West Coast",
-    flights: [["Air New Zealand or United business (Aeroplan)", "amex", 380000]],
+    flights: [["Air New Zealand or United business (Aeroplan)", "amex", 380000, "aeroplan"]],
     extras: [6000, 11000],
     stops: [
       ["Queenstown", 4, ["hilton-queenstown", "eichardts", "matakauri"]],
@@ -617,7 +618,7 @@ const DESTINATIONS = [
     highlights: ["Wombats, Tasmanian devils, kangaroos and sea lions in the wild", "Saffire and Southern Ocean Lodge, two of Australia's best lodges", "MONA, the world's strangest art museum"],
     watchouts: ["Bushfire risk late in the season", "Award seats to Australia are scarce in December"],
     hours: "~15h nonstop to Sydney",
-    flights: [["Qantas or United business (Aeroplan or Qantas via Amex)", "amex", 380000]],
+    flights: [["Qantas or United business (Aeroplan or Qantas via Amex)", "amex", 380000, "aeroplan"]],
     extras: [6000, 10000],
     stops: [
       ["Sydney", 3, ["ph-sydney", "sydney-harbour-marriott", "capella-sydney"]],
@@ -645,8 +646,8 @@ const DESTINATIONS = [
     watchouts: ["The most expensive option by far", "Weather can delay fly-cruise flights a day or more"],
     hours: "~14h to Santiago, then 3.5h to Punta Arenas",
     flights: [
-      ["United or Copa business to Santiago (Aeroplan)", "amex", 280000],
-      ["LATAM Santiago–Punta Arenas for two, round trip", "delta", 90000],
+      ["United or Copa business to Santiago (Aeroplan)", "amex", 280000, "aeroplan"],
+      ["LATAM Santiago–Punta Arenas for two, round trip", "delta", 90000, "skymiles"],
     ],
     extras: [3000, 6000],
     stops: [
@@ -672,8 +673,8 @@ const DESTINATIONS = [
     watchouts: ["Patagonian lodges are cash only", "Crossing between Argentina and Chile takes a day"],
     hours: "~11h to Buenos Aires",
     flights: [
-      ["Business to Buenos Aires, home from Santiago (Aeroplan)", "amex", 280000],
-      ["LATAM El Calafate–Santiago legs", "delta", 60000],
+      ["Business to Buenos Aires, home from Santiago (Aeroplan)", "amex", 280000, "aeroplan"],
+      ["LATAM El Calafate–Santiago legs", "delta", 60000, "skymiles"],
     ],
     extras: [5000, 9000],
     stops: [
@@ -698,8 +699,8 @@ const DESTINATIONS = [
     watchouts: ["Altitude in the Atacama (2,400m and up)", "Easter Island flights only on LATAM"],
     hours: "~10h nonstop to Santiago",
     flights: [
-      ["Business to Santiago (Aeroplan)", "amex", 280000],
-      ["LATAM to Calama and Easter Island for two", "delta", 100000],
+      ["Business to Santiago (Aeroplan)", "amex", 280000, "aeroplan"],
+      ["LATAM to Calama and Easter Island for two", "delta", 100000, "skymiles"],
     ],
     extras: [3000, 6000],
     stops: [
@@ -726,8 +727,8 @@ const DESTINATIONS = [
     watchouts: ["Small-yacht cruises are cash only, $8k–15k per person", "Machu Picchu may be clouded in"],
     hours: "~8h to Lima from Miami or Houston",
     flights: [
-      ["Business to Lima, home from Guayaquil (Aeroplan or LifeMiles)", "amex", 200000],
-      ["LATAM to and from the Galápagos", "delta", 60000],
+      ["Business to Lima, home from Guayaquil (Aeroplan or LifeMiles)", "amex", 200000, "aeroplan"],
+      ["LATAM to and from the Galápagos", "delta", 60000, "skymiles"],
     ],
     extras: [4000, 7000],
     stops: [
@@ -752,8 +753,8 @@ const DESTINATIONS = [
     watchouts: ["Heat and humidity", "Petty crime in Rio; use hotel cars"],
     hours: "~10h nonstop to Rio",
     flights: [
-      ["United business to Rio (Aeroplan)", "amex", 280000],
-      ["LATAM domestic legs for two", "delta", 60000],
+      ["United business to Rio (Aeroplan)", "amex", 280000, "aeroplan"],
+      ["LATAM domestic legs for two", "delta", 60000, "skymiles"],
     ],
     extras: [4000, 7000],
     stops: [
@@ -773,7 +774,7 @@ const DESTINATIONS = [
     highlights: ["Five-hour flight from the US with no jet lag", "Cheap business class on LifeMiles", "Rosario Islands by private boat"],
     watchouts: ["Less 'once in a lifetime' than the far-flung options", "Cartagena is busy over the holidays"],
     hours: "~5h nonstop to Bogotá or Cartagena",
-    flights: [["Avianca business (LifeMiles via Amex)", "amex", 140000]],
+    flights: [["Avianca business (LifeMiles via Amex)", "amex", 140000, "lifemiles"]],
     extras: [3000, 5000],
     stops: [
       ["Bogotá", 1, ["jw-bogota"]],
@@ -796,8 +797,8 @@ const DESTINATIONS = [
     watchouts: ["Less exotic for seasoned travelers", "Holiday weeks are crowded"],
     hours: "~5h nonstop to Liberia",
     flights: [
-      ["Delta first to Liberia for two (SkyMiles)", "delta", 100000],
-      ["Delta balance (Amex→Delta)", "amex", 40000],
+      ["Delta first to Liberia for two (SkyMiles)", "delta", 100000, "skymiles"],
+      ["Delta balance (Amex→Delta)", "amex", 40000, "skymiles"],
     ],
     extras: [3000, 6000],
     stops: [
@@ -817,7 +818,7 @@ const DESTINATIONS = [
     highlights: ["Sunrise from Temple IV at Tikal", "Cayo Espanto, a private island with a houseman", "Diving the Blue Hole from Turneffe"],
     watchouts: ["Border crossing to Guatemala takes half a day", "Simple food outside resorts"],
     hours: "~3h nonstop to Belize City",
-    flights: [["Delta to Belize City for two (SkyMiles)", "delta", 100000]],
+    flights: [["Delta to Belize City for two (SkyMiles)", "delta", 100000, "skymiles"]],
     extras: [3000, 6000],
     stops: [
       ["Tikal", 2, ["las-lagunas"]],
@@ -837,8 +838,8 @@ const DESTINATIONS = [
     watchouts: ["Close to home; may not feel like an adventure", "Holiday pricing at the beach"],
     hours: "~5h nonstop to Mexico City",
     flights: [
-      ["Aeroméxico or Delta business for two (SkyMiles)", "delta", 100000],
-      ["Delta balance (Amex→Delta)", "amex", 60000],
+      ["Aeroméxico or Delta business for two (SkyMiles)", "delta", 100000, "skymiles"],
+      ["Delta balance (Amex→Delta)", "amex", 60000, "skymiles"],
     ],
     extras: [4000, 7000],
     stops: [
@@ -859,8 +860,8 @@ const DESTINATIONS = [
     watchouts: ["Very expensive and mostly cash", "Not 'once in a lifetime' for seasoned travelers"],
     hours: "~4h nonstop to St. Maarten",
     flights: [
-      ["Delta first to St. Maarten for two (SkyMiles)", "delta", 100000],
-      ["Delta balance (Amex→Delta)", "amex", 60000],
+      ["Delta first to St. Maarten for two (SkyMiles)", "delta", 100000, "skymiles"],
+      ["Delta balance (Amex→Delta)", "amex", 60000, "skymiles"],
     ],
     extras: [6000, 10000],
     stops: [
@@ -887,9 +888,9 @@ const DESTINATIONS = [
     watchouts: ["The aurora needs clear skies; plan six or more nights in the north", "Very cold, almost no daylight"],
     hours: "~8h nonstop to Helsinki",
     flights: [
-      ["Finnair business to Helsinki (Avios)", "amex", 130000],
-      ["SAS business home from Tromsø via Oslo (Flying Blue)", "amex", 150000],
-      ["Helsinki–Ivalo–Tromsø hops", "delta", 40000],
+      ["Finnair business to Helsinki (Avios)", "amex", 130000, "avios"],
+      ["SAS business home from Tromsø via Oslo (Flying Blue)", "amex", 150000, "flyingblue"],
+      ["Helsinki–Ivalo–Tromsø hops", "delta", 40000, "skymiles"],
     ],
     extras: [5000, 9000],
     stops: [
@@ -930,7 +931,7 @@ const DESTINATIONS = [
     highlights: ["Ski or snowshoe in Zermatt, Verbier and St. Moritz", "The 8-hour Glacier Express panorama ride", "Fondue in mountain huts"],
     watchouts: ["Very expensive cash hotels", "Familiar if you know the Alps"],
     hours: "~8h nonstop to Zurich",
-    flights: [["Swiss or United business to Zurich (Aeroplan)", "amex", 280000]],
+    flights: [["Swiss or United business to Zurich (Aeroplan)", "amex", 280000, "aeroplan"]],
     extras: [6000, 10000],
     stops: [
       ["Zurich", 1, ["ph-zurich"]],

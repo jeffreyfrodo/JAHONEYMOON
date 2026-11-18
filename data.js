@@ -32,6 +32,20 @@ const PROGRAMS = {
   cash: { label: "Cash" },
 };
 
+// Airline award programs flights are booked through. `ratio` is airline miles
+// per wallet point (Amex → Asia Miles is 5:4). SkyMiles comes from the Delta
+// balance directly, or from Amex 1:1 when a flight line is paid with "amex".
+const AIRLINES = {
+  avios: { label: "Qatar/BA Avios", ratio: 1 },
+  aeroplan: { label: "Aeroplan", ratio: 1 },
+  flyingblue: { label: "Flying Blue", ratio: 1 },
+  virgin: { label: "Virgin Atlantic", ratio: 1 },
+  krisflyer: { label: "KrisFlyer", ratio: 1 },
+  asiamiles: { label: "Asia Miles", ratio: 0.8 },
+  lifemiles: { label: "LifeMiles", ratio: 1 },
+  skymiles: { label: "SkyMiles", ratio: 1 },
+};
+
 // Days before departure that award inventory typically opens (approximate).
 const BOOKING_WINDOWS = [
   { program: "Hyatt (via Chase)", days: 395 },

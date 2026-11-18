@@ -8,6 +8,9 @@ const state = loadState();
 
 function validateData() {
   for (const d of DESTINATIONS) {
+    for (const [label, wallet, , airline] of d.flights) {
+      if (wallet !== "cash" && !AIRLINES[airline]) throw new Error(`${d.id}: unknown airline program "${airline}" for "${label}"`);
+    }
     for (const [place, , ids] of d.stops) {
       for (const id of ids) {
         if (!HOTELS[id]) throw new Error(`${d.id}: unknown hotel "${id}" at ${place}`);
@@ -80,6 +83,17 @@ function rateLabel(hotel) {
 
 // ---------- budget ----------
 
+function flightVia(wallet, airline) {
+  const a = AIRLINES[airline];
+  if (wallet === "delta") return "Delta SkyMiles";
+  return `${walletLabel(wallet)} → ${a.label} 1:${a.ratio}`;
+}
+
+// Nights at stops that offer at least one stay bookable on points.
+function possiblePointNights(d) {
+  return d.stops.reduce((sum, [, nights, ids]) => sum + (ids.some((id) => HOTELS[id].program !== "cash") ? nights : 0), 0);
+}
+
 function chosenStay(d, i) {
   const ids = d.stops[i][2];
   const saved = state.stays[d.id]?.[i];
@@ -94,10 +108,14 @@ function budget(d) {
   let pointNights = 0;
   let totalNights = 0;
 
-  for (const [label, wallet, amount] of d.flights) {
-    if (wallet === "cash") cash += amount;
-    else needed[wallet] += amount;
-    lines.push([label, walletLabel(wallet), wallet === "cash" ? `$${fmt(amount)}` : fmt(amount)]);
+  for (const [label, wallet, amount, airline] of d.flights) {
+    if (wallet === "cash") {
+      cash += amount;
+      lines.push([label, "Cash", `$${fmt(amount)}`]);
+      continue;
+    }
+    needed[wallet] += amount / AIRLINES[airline].ratio;
+    lines.push([label, flightVia(wallet, airline), `${fmt(amount)} ${AIRLINES[airline].label}`]);
   }
 
   d.stops.forEach(([place, nights], i) => {
@@ -133,6 +151,7 @@ function budget(d) {
     short,
     cash: [d.extras[0] + cash, d.extras[1] + cash],
     pointsScore: Math.round(4 + (6 * pointNights) / totalNights),
+    pointNights,
     totalNights,
   };
 }
@@ -274,6 +293,43 @@ function renderBoard(rows) {
   ));
   $("#board").replaceChildren(el("thead", {}, head), el("tbody", {}, ...body));
   $("#board-count").textContent = `${rows.length} of ${DESTINATIONS.length} trips`;
+}
+
+// ---------- points feasibility ----------
+
+function renderFeasibility(rows) {
+  const head = el("tr", {},
+    el("th", { scope: "col", class: "left", text: "Trip" }),
+    el("th", { scope: "col", class: "left", text: "Business-class award flights" }),
+    ...WALLETS.map((w) => el("th", { scope: "col", text: w.label })),
+    el("th", { scope: "col", text: "Hotel nights on points" }),
+    el("th", { scope: "col", class: "left", text: "Verdict" }));
+
+  const body = rows.map(({ d, budget: b }) => {
+    const flights = el("ul", { class: "feas-flights" }, ...d.flights.map(([label, wallet, amount, airline]) =>
+      el("li", {},
+        el("span", { text: label }),
+        el("span", { class: "feas-via", text: wallet === "cash" ? `Cash · $${fmt(amount)}` : `${flightVia(wallet, airline)} · ${fmt(amount)}` }))));
+    const possible = possiblePointNights(d);
+    const verdict = b.short.length
+      ? `Short ${b.short.map((w) => `${fmt(b.needed[w.id] - state.balances[w.id])} ${w.label}`).join(", ")}`
+      : "Covered by your points";
+    return el("tr", { class: isShortlisted(d.id) ? "is-short" : "" },
+      el("td", { class: "left trip" }, el("a", { href: `#${d.id}`, text: d.name })),
+      el("td", { class: "left" }, flights),
+      ...WALLETS.map((w) => {
+        const need = b.needed[w.id];
+        return el("td", { class: need > state.balances[w.id] ? "num over" : "num", text: need > 0 ? fmt(need) : "–" });
+      }),
+      el("td", { class: "num" },
+        `${b.pointNights} of ${b.totalNights}`,
+        el("span", { class: "feas-max", text: possible > b.pointNights ? ` (up to ${possible})` : "" })),
+      el("td", { class: `left pts ${b.short.length ? "short" : "ok"}`, text: verdict }));
+  });
+
+  $("#feas").replaceChildren(el("thead", {}, head), el("tbody", {}, ...body));
+  const covered = rows.filter((r) => !r.budget.short.length).length;
+  $("#feas-count").textContent = `${covered} of ${rows.length} trips fit your balances with the stays you picked`;
 }
 
 // ---------- cards ----------
@@ -473,7 +529,9 @@ function renderFilter() {
 
 function update() {
   const rows = ranked();
-  renderBoard(rows.filter((r) => isVisible(r.d)));
+  const visible = rows.filter((r) => isVisible(r.d));
+  renderBoard(visible);
+  renderFeasibility(visible);
   renderCards(rows);
   renderFilter();
 }
