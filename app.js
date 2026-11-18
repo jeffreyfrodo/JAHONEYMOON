@@ -3,6 +3,7 @@ const PARTNERS = ["a", "b"];
 
 validateData();
 const state = loadState();
+const shareNotice = importShared();
 
 // ---------- data checks ----------
 
@@ -32,9 +33,10 @@ function defaultState() {
     weights: { a: { ...weights }, b: { ...weights } },
     balances: Object.fromEntries(WALLETS.map((w) => [w.id, w.balance])),
     depart: "2027-12-11",
-    likes: {},
+    reviews: {}, // tripId -> { a: { stars, note, at }, b: {...} }
     stays: {},
     filter: "all",
+    sort: "match",
     region: "all",
   };
 }
@@ -185,13 +187,69 @@ function ranked() {
     const scores = { ...d.scores, points: b.pointsScore };
     const a = match(scores, state.weights.a);
     const bb = match(scores, state.weights.b);
-    return { d, budget: b, scores, a, b: bb, both: (a + bb) / 2, splurge: hasSplurge(d) };
-  }).sort((x, y) => y.splurge - x.splurge || y.both - x.both);
+    return { d, budget: b, scores, a, b: bb, both: (a + bb) / 2, splurge: hasSplurge(d), stars: avgStars(d.id) };
+  }).sort(state.sort === "stars"
+    ? (x, y) => y.stars - x.stars || y.both - x.both
+    : (x, y) => y.splurge - x.splurge || y.both - x.both);
+}
+
+// ---------- reviews (stars + notes) ----------
+
+function review(id, p) {
+  return state.reviews[id]?.[p] || { stars: 0, note: "", at: 0 };
+}
+
+function setReview(id, p, change) {
+  state.reviews[id] = { ...state.reviews[id], [p]: { ...review(id, p), ...change, at: Date.now() } };
+  saveState();
+}
+
+// Average of the stars given; 0 when neither of you has rated the trip.
+function avgStars(id) {
+  const given = PARTNERS.map((p) => review(id, p).stars).filter((s) => s > 0);
+  return given.length ? given.reduce((a, b) => a + b, 0) / given.length : 0;
 }
 
 function isShortlisted(id) {
-  const l = state.likes[id];
-  return Boolean(l && (l.a || l.b));
+  return PARTNERS.some((p) => review(id, p).stars >= 4);
+}
+
+function toBase64Url(text) {
+  const bytes = new TextEncoder().encode(text);
+  return btoa(String.fromCharCode(...bytes)).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+}
+
+function fromBase64Url(text) {
+  const bin = atob(text.replace(/-/g, "+").replace(/_/g, "/"));
+  return new TextDecoder().decode(Uint8Array.from(bin, (c) => c.charCodeAt(0)));
+}
+
+function shareLink() {
+  const payload = toBase64Url(JSON.stringify({ names: state.names, reviews: state.reviews }));
+  return `${location.origin}${location.pathname}#share=${payload}`;
+}
+
+// Merges ratings and notes from a share link: for each trip and person, the newer entry wins.
+function importShared() {
+  const prefix = "#share=";
+  if (!location.hash.startsWith(prefix)) return "";
+  const incoming = JSON.parse(fromBase64Url(location.hash.slice(prefix.length)));
+  let merged = 0;
+  for (const [id, byPerson] of Object.entries(incoming.reviews)) {
+    for (const p of PARTNERS) {
+      const theirs = byPerson[p];
+      if (theirs && theirs.at > review(id, p).at) {
+        state.reviews[id] = { ...state.reviews[id], [p]: theirs };
+        merged++;
+      }
+    }
+  }
+  for (const p of PARTNERS) {
+    if (state.names[p] === defaultState().names[p]) state.names[p] = incoming.names[p];
+  }
+  saveState();
+  history.replaceState(null, "", location.pathname + location.search);
+  return merged ? `Merged ${merged} new ${merged === 1 ? "rating or note" : "ratings and notes"} from the link.` : "That link had nothing newer than what you have.";
 }
 
 function isVisible(d) {
@@ -286,6 +344,7 @@ function renderBoard(rows) {
     el("th", { scope: "col", text: "#" }),
     el("th", { scope: "col", class: "left", text: "Trip" }),
     el("th", { scope: "col", text: "Both" }),
+    el("th", { scope: "col", text: "Stars" }),
     el("th", { scope: "col", class: "col-a", text: state.names.a }),
     el("th", { scope: "col", class: "col-b", text: state.names.b }),
     ...CATEGORIES.map((c) => el("th", { scope: "col", class: "cat", title: c.label }, el("span", { text: c.label }))),
@@ -296,6 +355,10 @@ function renderBoard(rows) {
     el("td", { class: "num rank", text: i + 1 }),
     el("td", { class: "left trip" }, el("a", { href: `#${r.d.id}`, text: r.d.name }), el("span", { class: "board-region", text: r.d.region }), splurgeTag(r.d)),
     el("td", { class: "num strong", text: pct(r.both) }),
+    el("td", { class: "num stars-cell" }, ...PARTNERS.map((p) => {
+      const s = review(r.d.id, p).stars;
+      return el("span", { class: `col-${p}`, title: state.names[p], text: s ? `${s}★` : "–" });
+    })),
     el("td", { class: "num col-a", text: pct(r.a) }),
     el("td", { class: "num col-b", text: pct(r.b) }),
     ...CATEGORIES.map((c) => el("td", { class: `heat ${heatClass(r.scores[c.id])}`, text: r.scores[c.id] })),
@@ -400,16 +463,24 @@ function buildCard(d) {
     el("li", {}, el("span", { class: "stop-chip", text: place }), el("span", { class: "nights", text: `${nights}n` }))));
   const totalNights = d.stops.reduce((s, [, n]) => s + n, 0);
 
-  const likeBtns = PARTNERS.map((p) => {
-    const b = el("button", { type: "button", class: `like like-${p}`, "aria-pressed": "false" });
-    b.addEventListener("click", () => {
-      const cur = state.likes[d.id] || { a: false, b: false };
-      cur[p] = !cur[p];
-      state.likes[d.id] = cur;
-      saveState();
-      update();
+  const reviewers = PARTNERS.map((p) => {
+    const name = el("span", { class: `review-name col-${p}` });
+    const stars = [1, 2, 3, 4, 5].map((n) => {
+      const b = el("button", { type: "button", class: `star star-${p}`, "aria-label": `${n} of 5`, text: "★" });
+      b.addEventListener("click", () => {
+        setReview(d.id, p, { stars: review(d.id, p).stars === n ? 0 : n });
+        update();
+      });
+      return b;
     });
-    return b;
+    const note = el("textarea", { class: "review-note", rows: "2" });
+    note.value = review(d.id, p).note;
+    // Notes don't change the ranking, so typing saves without re-rendering.
+    note.addEventListener("input", () => setReview(d.id, p, { note: note.value }));
+    const box = el("div", { class: `review review-${p}` },
+      el("div", { class: "review-head" }, name, el("span", { class: "stars", role: "group" }, ...stars)),
+      note);
+    return { p, name, stars, note, box };
   });
 
   const node = {
@@ -421,7 +492,7 @@ function buildCard(d) {
     planBody: el("tbody"),
     usage: el("div", { class: "usage" }),
     cash: el("span", { class: "cash-num" }),
-    likeBtns,
+    reviewers,
   };
 
   node.card = el("article", { class: "card", id: d.id },
@@ -434,7 +505,7 @@ function buildCard(d) {
           el("p", { class: "tagline", text: d.tagline })),
         el("div", { class: "match" }, node.scoreBoth, el("span", { class: "match-label", text: "match" }), el("div", { class: "match-split" }, node.scoreA, node.scoreB))),
       el("div", { class: "route-wrap" }, route, el("span", { class: "total", text: `${totalNights} nights · ${d.hours}` })),
-      el("div", { class: "likes" }, ...likeBtns),
+      el("div", { class: "reviews" }, ...reviewers.map((r) => r.box)),
       el("p", { class: "december" }, el("strong", { text: "December: " }), d.december),
       el("div", { class: "detail-grid" },
         node.bars,
@@ -464,11 +535,13 @@ function updateCard(node, r, i) {
   node.scoreA.textContent = `${state.names.a} ${pct(r.a)}`;
   node.scoreB.textContent = `${state.names.b} ${pct(r.b)}`;
 
-  const likes = state.likes[d.id] || {};
-  PARTNERS.forEach((p, idx) => {
-    node.likeBtns[idx].setAttribute("aria-pressed", String(Boolean(likes[p])));
-    node.likeBtns[idx].textContent = `${likes[p] ? "♥" : "♡"} ${state.names[p]}`;
-  });
+  for (const { p, name, stars, note } of node.reviewers) {
+    const rv = review(d.id, p);
+    name.textContent = state.names[p];
+    stars.forEach((b, idx) => b.setAttribute("aria-pressed", String(idx < rv.stars)));
+    note.placeholder = `${state.names[p]}'s notes`;
+    if (document.activeElement !== note) note.value = rv.note;
+  }
 
   node.bars.replaceChildren(...CATEGORIES.map((c) =>
     el("li", {},
@@ -534,6 +607,8 @@ function renderRegionFilter() {
 function renderFilter() {
   $("#filter-all").setAttribute("aria-pressed", String(state.filter === "all"));
   $("#filter-short").setAttribute("aria-pressed", String(state.filter === "short"));
+  $("#sort-match").setAttribute("aria-pressed", String(state.sort === "match"));
+  $("#sort-stars").setAttribute("aria-pressed", String(state.sort === "stars"));
 }
 
 // ---------- wiring ----------
@@ -563,6 +638,30 @@ function init() {
       update();
     });
   }
+  for (const [id, value] of [["#sort-match", "match"], ["#sort-stars", "stars"]]) {
+    $(id).addEventListener("click", () => {
+      state.sort = value;
+      saveState();
+      update();
+    });
+  }
+  const shareUrl = $("#share-url");
+  $("#share").addEventListener("click", async () => {
+    shareUrl.value = shareLink();
+    shareUrl.hidden = false;
+    shareUrl.select();
+    await navigator.clipboard.writeText(shareUrl.value);
+    $("#share-status").textContent = "Link copied. Send it to each other; opening it merges the newer ratings and notes.";
+  });
+  $("#share-status").textContent = shareNotice;
+  // A share link opened in a tab that already shows the page only changes the hash.
+  window.addEventListener("hashchange", () => {
+    const notice = importShared();
+    if (!notice) return;
+    $("#share-status").textContent = notice;
+    renderPriorities();
+    update();
+  });
   renderPriorities();
   renderWallet();
   renderWindows();

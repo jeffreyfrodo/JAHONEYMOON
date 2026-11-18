@@ -43,11 +43,20 @@
       </div>
       <div class="controls">
       <label class="region-filter" for="region"><span class="visually-hidden">Region</span><select id="region"></select></label>
+      <div class="filter" role="group" aria-label="Rank trips by">
+        <button type="button" id="sort-match" aria-pressed="true">By match</button>
+        <button type="button" id="sort-stars" aria-pressed="false">By our stars</button>
+      </div>
       <div class="filter" role="group" aria-label="Filter destinations">
         <button type="button" id="filter-all" aria-pressed="true">All trips</button>
-        <button type="button" id="filter-short" aria-pressed="false">Shortlist</button>
+        <button type="button" id="filter-short" aria-pressed="false">4★ and up</button>
       </div>
+      <button type="button" class="share-btn" id="share">Share our ratings</button>
       </div>
+    </div>
+    <div class="share-row">
+      <input type="text" id="share-url" readonly hidden aria-label="Share link">
+      <p class="hint" id="share-status" role="status"></p>
     </div>
     <div class="board-scroll"><table class="board" id="board"></table></div>
   </section>

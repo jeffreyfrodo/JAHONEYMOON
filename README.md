@@ -8,7 +8,7 @@ A small static page for comparing once-in-a-lifetime honeymoon options for Decem
 - **Points wallet.** Flights and chosen hotels are paid from Amex MR, Chase UR, Delta SkyMiles and Marriott Bonvoy (Hilton via Amex 1:2, Hyatt/IHG via Chase, Marriott shortfall topped up from Amex), applying 5th-night-free rules and checking against your balances.
 - **Points feasibility.** One table across all trips: each business-class award flight with its transfer path (for example Amex MR → Aeroplan 1:1), the points drawn from each wallet, hotel nights on points with your picks versus the most possible, and whether your balances cover it.
 - **Booking windows.** Enter a departure date to see when each program's award calendar opens.
-- **Shortlist.** Heart the trips you each like; filter the scoreboard to the shortlist. Choices are saved in your browser.
+- **Stars and notes.** Each of you rates every trip 1–5 stars and keeps notes on it. Rank the scoreboard by match or by your stars, or filter to trips either of you gave 4★ or more. "Share our ratings" copies a link; opening it on the other phone merges in whichever ratings and notes are newer. Everything is saved in your browser.
 
 ## Files
 
