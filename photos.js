@@ -699,5 +699,112 @@ const PHOTOS = {
     "artist": "Flyax",
     "license": "CC BY-SA 3.0",
     "title": "Pylos-sfaktiria"
-  }
+  },
+
+  // ---- Resort photos ----
+  "conrad-rangali": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Conrad_Maldives_Rangali_Island_Resort_%E2%80%94_waterfront_and_terrace_%28evening%29_2016-06-23.jpg/1280px-Conrad_Maldives_Rangali_Island_Resort_%E2%80%94_waterfront_and_terrace_%28evening%29_2016-06-23.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Conrad_Maldives_Rangali_Island_Resort_%E2%80%94_waterfront_and_terrace_(evening)_2016-06-23.jpg",
+    "artist": "Ranojit Chakraborty",
+    "license": "CC BY-SA 4.0",
+    "title": "Conrad Maldives Rangali Island Resort — waterfront and terrace (evening) 2016-06-23"
+  },
+  "ithaa": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Ithaa_%28Undersea_Restaurant%29.jpg/1280px-Ithaa_%28Undersea_Restaurant%29.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Ithaa_(Undersea_Restaurant).jpg",
+    "artist": "Martin Henke",
+    "license": "CC BY 3.0",
+    "title": "Ithaa (Undersea Restaurant)"
+  },
+  "ithaa-inside": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Ithaa_inside.JPG/1280px-Ithaa_inside.JPG",
+    "source": "https://commons.wikimedia.org/wiki/File:Ithaa_inside.JPG",
+    "artist": "Alexey Potov - Noblige",
+    "license": "CC BY-SA 2.5",
+    "title": "Ithaa inside"
+  },
+  "hadahaa-1": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Park_Hyatt_Hadahaa_Maldives1.jpg/1280px-Park_Hyatt_Hadahaa_Maldives1.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Park_Hyatt_Hadahaa_Maldives1.jpg",
+    "artist": "Ben & Gab",
+    "license": "CC BY 2.0",
+    "title": "Park Hyatt Hadahaa Maldives1"
+  },
+  "hadahaa-2": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Park_Hyatt_Hadahaa_Maldives2.jpg/1280px-Park_Hyatt_Hadahaa_Maldives2.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Park_Hyatt_Hadahaa_Maldives2.jpg",
+    "artist": "Ben & Gab",
+    "license": "CC BY 2.0",
+    "title": "Park Hyatt Hadahaa Maldives2"
+  },
+  "hadahaa-3": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Park_Hyatt_Hadahaa_Maldives3.jpg/1280px-Park_Hyatt_Hadahaa_Maldives3.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Park_Hyatt_Hadahaa_Maldives3.jpg",
+    "artist": "Ben & Gab",
+    "license": "CC BY 2.0",
+    "title": "Park Hyatt Hadahaa Maldives3"
+  },
+  "soneva-fushi": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Soneva_Fushi_-_panoramio_%281%29.jpg/1280px-Soneva_Fushi_-_panoramio_%281%29.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Soneva_Fushi_-_panoramio_(1).jpg",
+    "artist": "Ameer Dawood",
+    "license": "CC BY 3.0",
+    "title": "Soneva Fushi - panoramio (1)"
+  },
+  "fs-bora-20": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/DL2A_Four_Seasons_Bora_Bora_20.jpg/1280px-DL2A_Four_Seasons_Bora_Bora_20.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:DL2A_Four_Seasons_Bora_Bora_20.jpg",
+    "artist": "Didierlefort",
+    "license": "CC BY-SA 3.0",
+    "title": "DL2A Four Seasons Bora Bora 20"
+  },
+  "fs-bora-8": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/DL2A_Four_Seasons_Bora_Bora_8.jpg/1280px-DL2A_Four_Seasons_Bora_Bora_8.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:DL2A_Four_Seasons_Bora_Bora_8.jpg",
+    "artist": "Didierlefort",
+    "license": "CC BY-SA 3.0",
+    "title": "DL2A Four Seasons Bora Bora 8"
+  },
+  "meridien-bora": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/3/33/DL2A_Meridien_Bora_Bora.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:DL2A_Meridien_Bora_Bora.jpg",
+    "artist": "Didierlefort",
+    "license": "CC BY-SA 3.0",
+    "title": "DL2A Meridien Bora Bora"
+  },
+  "north-island": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/6/60/North_Island_Seychelles.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:North_Island_Seychelles.jpg",
+    "artist": "Gerard Larose, STB",
+    "license": "CC BY 4.0",
+    "title": "North Island Seychelles"
+  },
+  "north-island-petite-anse": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/8/85/Petite_Anse_North_Island_Seychelles.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Petite_Anse_North_Island_Seychelles.jpg",
+    "artist": "Hajira Amla, Seychelles News Agency",
+    "license": "CC BY 4.0",
+    "title": "Petite Anse North Island Seychelles"
+  },
+  "north-island-shores": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/8/82/North_Island_Seychelles_shores.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:North_Island_Seychelles_shores.jpg",
+    "artist": "Joe Laurence, Seychelles News Agency",
+    "license": "CC BY 4.0",
+    "title": "North Island Seychelles shores"
+  },
+  "bulgari-ocean": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Bulgari_Ocean_View_%287070507937%29.jpg/1280px-Bulgari_Ocean_View_%287070507937%29.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Bulgari_Ocean_View_(7070507937).jpg",
+    "artist": "Simon_sees from Australia",
+    "license": "CC BY 2.0",
+    "title": "Bulgari Ocean View (7070507937)"
+  },
+  "bulgari-pool": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Bulgari_Resort_Bali_Main_Pool_%2811267201646%29.jpg/1280px-Bulgari_Resort_Bali_Main_Pool_%2811267201646%29.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Bulgari_Resort_Bali_Main_Pool_(11267201646).jpg",
+    "artist": "Simon_sees",
+    "license": "CC BY 2.0",
+    "title": "Bulgari Resort Bali Main Pool (11267201646)"
+  },
 };

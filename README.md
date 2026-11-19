@@ -2,6 +2,7 @@
 
 A small static page for comparing once-in-a-lifetime honeymoon options for December 2027.
 
+- **Resorts first.** Nineteen splurge resorts (Maldives, Bora Bora, Seychelles, the Red Sea, Bali, Mauritius, the Mara, Niseko, Krabi), each with photos, what makes it special, which villa to book, where to eat, and five scores (villa, food, setting, privacy, things to do). Every card prices five nights against your wallets, compares the points to the cash rate in cents per point, and says whether it's a great, good or weak redemption, or cash only. Rank by points value, resort score or your stars; each of you can star and annotate every resort.
 - **Two sets of priorities.** Each of you weights 11 categories (food, adventure, relaxation, romance, wildlife, culture, December weather, uniqueness, luxury, ease of travel, points-friendliness) from 0 to 5. Each trip gets a match score per person and a combined score, and the list re-ranks live.
 - **43 trips in 8 regions, none in a country you've already visited.** Each trip has at most three stops. Trips built around a 5-night Marriott splurge (a stop of five or more nights with a Marriott at 50k+ points a night) are tagged and rank first. Filter by region or by your shortlist.
 - **Hotel choice at every stop.** Each stop lists 1–5 stays (Hyatt, Marriott, Hilton or IHG on points, or cash splurges) with an estimated nightly rate. Picking one updates the trip's points plan, cash estimate and points-friendly score.
@@ -18,6 +19,7 @@ A small static page for comparing once-in-a-lifetime honeymoon options for Decem
 | `styles.css` | Styles (light and dark themes) |
 | `data.js` | Categories, wallets, point programs, booking windows, playbook |
 | `hotels.js` | Every stay: program, nightly rate, one-line note |
+| `resorts.js` | Splurge resort profiles: pitch, villa, dining, scores, cash rate, photos |
 | `trips.js` | All 43 trips: scores, stops and the hotels offered at each |
 | `photos.js` | Photo URLs (Wikimedia Commons) and credits |
 | `app.js` | Scoring, rendering and saved state |

@@ -22,6 +22,15 @@ function validateData() {
       if (!PHOTOS[slug]) throw new Error(`${d.id}: missing photo "${slug}"`);
     }
   }
+  for (const r of RESORTS) {
+    if (!HOTELS[r.hotel]) throw new Error(`resort: unknown hotel "${r.hotel}"`);
+    for (const [slug] of r.photos) {
+      if (!PHOTOS[slug]) throw new Error(`${r.hotel}: missing photo "${slug}"`);
+    }
+    for (const c of RESORT_SCORES) {
+      if (!(r.scores[c.id] >= 1)) throw new Error(`${r.hotel}: missing score "${c.id}"`);
+    }
+  }
 }
 
 // ---------- state ----------
@@ -38,6 +47,8 @@ function defaultState() {
     filter: "all",
     sort: "match",
     region: "all",
+    resortSort: "value",
+    resortWhere: "all",
   };
 }
 
@@ -445,11 +456,15 @@ function buildStays(d) {
         saveState();
         update();
       });
+      const profile = RESORTS.some((r) => r.hotel === id)
+        ? el("a", { class: "stay-profile", href: `#resort-${id}`, text: "Resort profile" })
+        : "";
       return el("label", { class: `stay prog-${h.program}`, for: `${name}-${id}` },
         input,
         el("span", { class: "stay-main" },
           el("span", { class: "stay-name", text: h.name }),
-          el("span", { class: "stay-note", text: h.note })),
+          el("span", { class: "stay-note", text: h.note }),
+          profile),
         el("span", { class: "stay-rate", text: rateLabel(h) }));
     });
     return el("fieldset", { class: "stop" },
@@ -576,6 +591,200 @@ function renderCards(rows) {
   });
 }
 
+// ---------- resorts ----------
+
+const resortKey = (r) => `resort:${r.hotel}`;
+const resortScore = (r) => RESORT_SCORES.reduce((sum, c) => sum + r.scores[c.id], 0) / RESORT_SCORES.length;
+const tripsWith = (hotelId) => DESTINATIONS.filter((d) => d.stops.some(([, , ids]) => ids.includes(hotelId)));
+
+// What RESORT_NIGHTS at the resort costs from your wallets, and how good a use of points that is.
+function redemption(r) {
+  const h = HOTELS[r.hotel];
+  const cashTotal = r.cash * RESORT_NIGHTS;
+  const draw = Object.fromEntries(WALLETS.map((w) => [w.id, 0]));
+  let cost;
+  let path;
+  if (h.program === "cash") {
+    draw.amex = Math.round(cashTotal / (AMEX_TRAVEL_CPP / 100));
+    cost = `$${fmt(cashTotal)} cash`;
+    path = `or ${fmt(draw.amex)} Amex MR through Amex Travel at ${AMEX_TRAVEL_CPP}¢ a point`;
+  } else {
+    const prog = PROGRAMS[h.program];
+    const free = prog.fifthNightFree ? Math.floor(RESORT_NIGHTS / 5) : 0;
+    const points = (RESORT_NIGHTS - free) * h.rate;
+    cost = `${fmt(points)} ${prog.label}${free ? " (5th night free)" : ""}`;
+    if (h.program === "marriott") {
+      draw.marriott = Math.min(points, state.balances.marriott);
+      draw.amex = points - draw.marriott;
+    } else {
+      draw[prog.wallet] = points / prog.ratio;
+    }
+    path = WALLETS.filter((w) => draw[w.id] > 0).map((w) => `${fmt(draw[w.id])} ${w.label}`).join(" + ");
+  }
+  const spent = WALLETS.reduce((sum, w) => sum + draw[w.id], 0);
+  const cpp = (cashTotal * 100) / spent;
+  // A cash resort is never "short": paying with Amex points is only an option.
+  const short = h.program === "cash" ? [] : WALLETS.filter((w) => draw[w.id] > state.balances[w.id]);
+
+  let verdict;
+  let tone;
+  if (h.program === "cash") [verdict, tone] = ["Cash only", "cash"];
+  else if (cpp >= 2) [verdict, tone] = ["Great redemption", "great"];
+  else if (cpp >= 1.3) [verdict, tone] = ["Good redemption", "good"];
+  else [verdict, tone] = ["Weak redemption", "weak"];
+  if (short.length) tone = "short";
+
+  return { cashTotal, cost, path, draw, cpp, short, verdict, tone, mrLeft: state.balances.amex - draw.amex };
+}
+
+function redemptionNote(h, x) {
+  if (x.short.length) {
+    const gaps = x.short.map((w) => `${fmt(x.draw[w.id] - state.balances[w.id])} ${w.label}`).join(", ");
+    const fix = h.program === "hyatt" || h.program === "ihg" ? " Amex can't transfer to this program, so book fewer nights on points or pay the rest in cash." : "";
+    return `You're short ${gaps}.${fix}`;
+  }
+  if (h.program === "cash") {
+    const fits = x.draw.amex <= state.balances.amex ? "" : " That's more Amex points than you have.";
+    return `No hotel program sells this resort for points. Paying with Amex points gets only ${AMEX_TRAVEL_CPP}¢ each.${fits} Pay cash through Fine Hotels + Resorts if it's listed, for the perks.`;
+  }
+  return `About ${x.cpp.toFixed(1)}¢ per point spent. Paying through Amex Travel instead would get ${AMEX_TRAVEL_CPP}¢.`;
+}
+
+const resortNodes = new Map();
+
+function buildResortCard(r) {
+  const h = HOTELS[r.hotel];
+  const gallery = r.photos.length
+    ? buildGallery({ name: h.name, photos: r.photos })
+    : el("div", { class: "photo-empty" }, el("span", { text: "No free-to-use photo of this resort yet" }));
+  const search = `https://www.google.com/search?tbm=isch&q=${encodeURIComponent(`${h.name} villa`)}`;
+  const trips = tripsWith(r.hotel);
+
+  const reviewers = PARTNERS.map((p) => {
+    const name = el("span", { class: `review-name col-${p}` });
+    const stars = [1, 2, 3, 4, 5].map((n) => {
+      const b = el("button", { type: "button", class: `star star-${p}`, "aria-label": `${n} of 5`, text: "★" });
+      b.addEventListener("click", () => {
+        setReview(resortKey(r), p, { stars: review(resortKey(r), p).stars === n ? 0 : n });
+        update();
+      });
+      return b;
+    });
+    const note = el("textarea", { class: "review-note", rows: "2" });
+    note.addEventListener("input", () => setReview(resortKey(r), p, { note: note.value }));
+    const box = el("div", { class: `review review-${p}` },
+      el("div", { class: "review-head" }, name, el("span", { class: "stars", role: "group" }, ...stars)),
+      note);
+    return { p, name, stars, note, box };
+  });
+
+  const node = {
+    rank: el("span", { class: "rank-badge" }),
+    verdict: el("span", { class: "verdict" }),
+    cost: el("p", { class: "redeem-cost" }),
+    path: el("p", { class: "redeem-path" }),
+    worth: el("p", { class: "redeem-worth" }),
+    note: el("p", { class: "redeem-note" }),
+    reviewers,
+  };
+
+  node.card = el("article", { class: "card resort", id: `resort-${r.hotel}` },
+    gallery,
+    el("div", { class: "card-body" },
+      el("div", { class: "card-top" },
+        el("div", { class: "title-block" },
+          el("span", { class: "eyebrow-row" }, node.rank, el("span", { class: "region-tag", text: r.where }), el("span", { class: `prog-tag prog-${h.program}`, text: h.program === "cash" ? "Cash" : PROGRAMS[h.program].label })),
+          el("h3", { text: h.name }),
+          el("p", { class: "tagline", text: r.pitch })),
+        el("div", { class: "match" },
+          el("span", { class: "score-both", text: resortScore(r).toFixed(1) }),
+          el("span", { class: "match-label", text: "resort score" }))),
+      el("div", { class: "redeem" },
+        el("div", { class: "redeem-head" }, el("h4", { text: `${RESORT_NIGHTS} nights on points?` }), node.verdict),
+        node.cost, node.path, node.worth, node.note),
+      el("div", { class: "detail-grid" },
+        el("div", { class: "pros-cons" },
+          el("h4", { text: "What makes it special" }),
+          el("ul", { class: "pros" }, ...r.special.map((t) => el("li", { text: t }))),
+          el("p", { class: "resort-line" }, el("strong", { text: "Book: " }), r.villa),
+          el("p", { class: "resort-line" }, el("strong", { text: "Eat: " }), r.dining)),
+        el("ul", { class: "bars" }, ...RESORT_SCORES.map((c) =>
+          el("li", {},
+            el("span", { class: "bar-label", text: c.label }),
+            el("span", { class: "bar-track" }, el("span", { class: `bar-fill ${heatClass(r.scores[c.id])}`, style: `width:${r.scores[c.id] * 10}%` })),
+            el("span", { class: "bar-num", text: r.scores[c.id] }))))),
+      el("div", { class: "reviews" }, ...reviewers.map((x) => x.box)),
+      el("p", { class: "resort-links" },
+        el("a", { href: search, target: "_blank", rel: "noopener", text: "See photos of this resort ↗" }),
+        ...(trips.length
+          ? [el("span", { text: " · In trips: " }), ...trips.flatMap((d, i) => [i ? ", " : "", el("a", { href: `#${d.id}`, text: d.name })])]
+          : []))));
+  return node;
+}
+
+function updateResortCard(node, r, i) {
+  const h = HOTELS[r.hotel];
+  const x = redemption(r);
+  node.rank.textContent = `No. ${i + 1}`;
+  node.verdict.className = `verdict ${x.tone}`;
+  node.verdict.textContent = x.short.length ? `${x.verdict}, but short` : x.verdict;
+  const isCash = h.program === "cash";
+  node.cost.textContent = isCash ? x.cost : `${x.cost} · worth about $${fmt(x.cashTotal)} in cash`;
+  node.path.textContent = isCash ? x.path : `From your wallets: ${x.path}`;
+  node.worth.textContent = isCash ? "" : `Leaves ${fmt(Math.max(x.mrLeft, 0))} Amex MR for flights`;
+  node.note.textContent = redemptionNote(h, x);
+  for (const { p, name, stars, note } of node.reviewers) {
+    const rv = review(resortKey(r), p);
+    name.textContent = state.names[p];
+    stars.forEach((b, idx) => b.setAttribute("aria-pressed", String(idx < rv.stars)));
+    note.placeholder = `${state.names[p]}'s notes`;
+    if (document.activeElement !== note) note.value = rv.note;
+  }
+  node.card.hidden = state.resortWhere !== "all" && r.where !== state.resortWhere;
+}
+
+function rankedResorts() {
+  const key = {
+    score: (r) => resortScore(r),
+    value: (r) => (HOTELS[r.hotel].program === "cash" ? 0 : redemption(r).cpp) - (redemption(r).short.length ? 10 : 0),
+    stars: (r) => avgStars(resortKey(r)) * 100 + resortScore(r),
+  }[state.resortSort];
+  return [...RESORTS].sort((a, b) => key(b) - key(a));
+}
+
+function renderResorts() {
+  const root = $("#resorts");
+  const rows = rankedResorts();
+  rows.forEach((r, i) => {
+    if (!resortNodes.has(r.hotel)) resortNodes.set(r.hotel, buildResortCard(r));
+    const node = resortNodes.get(r.hotel);
+    updateResortCard(node, r, i);
+    root.append(node.card);
+  });
+  for (const id of ["score", "value", "stars"]) $(`#rsort-${id}`).setAttribute("aria-pressed", String(state.resortSort === id));
+  const shown = rows.filter((r) => state.resortWhere === "all" || r.where === state.resortWhere).length;
+  $("#resort-count").textContent = `${shown} of ${RESORTS.length} resorts`;
+}
+
+function initResortControls() {
+  const select = $("#resort-where");
+  const places = [...new Set(RESORTS.map((r) => r.where))];
+  select.replaceChildren(el("option", { value: "all", text: "Everywhere" }), ...places.map((p) => el("option", { value: p, text: p })));
+  select.value = state.resortWhere;
+  select.addEventListener("change", () => {
+    state.resortWhere = select.value;
+    saveState();
+    update();
+  });
+  for (const id of ["score", "value", "stars"]) {
+    $(`#rsort-${id}`).addEventListener("click", () => {
+      state.resortSort = id;
+      saveState();
+      update();
+    });
+  }
+}
+
 // ---------- static sections ----------
 
 function renderPlaybook() {
@@ -583,7 +792,7 @@ function renderPlaybook() {
 }
 
 function renderCredits() {
-  const used = [...new Set(DESTINATIONS.flatMap((d) => d.photos.map(([slug]) => slug)))];
+  const used = [...new Set([...RESORTS, ...DESTINATIONS].flatMap((d) => d.photos.map(([slug]) => slug)))];
   $("#credits").replaceChildren(...used.map((slug) => {
     const p = PHOTOS[slug];
     return el("li", {}, el("a", { href: p.source, target: "_blank", rel: "noopener", text: p.title }), ` by ${p.artist}, ${p.license}`);
@@ -614,6 +823,7 @@ function renderFilter() {
 // ---------- wiring ----------
 
 function update() {
+  renderResorts();
   const rows = ranked();
   const visible = rows.filter((r) => isVisible(r.d));
   renderBoard(visible);
@@ -666,6 +876,7 @@ function init() {
   renderWallet();
   renderWindows();
   renderRegionFilter();
+  initResortControls();
   renderPlaybook();
   renderCredits();
   update();

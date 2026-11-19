@@ -10,11 +10,30 @@
   <div class="wrap masthead-inner">
     <p class="eyebrow">December 2027 · up to 14 nights · two travelers</p>
     <h1>Honeymoon Atlas</h1>
-    <p class="lede">Forty-three once-in-a-lifetime trips in places you haven't been yet, most built around five nights at a Marriott splurge, each with a choice of hotels at every stop, scored on what matters to each of you and priced against the points you already hold.</p>
+    <p class="lede">Start with the resort you'd build the whole trip around: what makes it special, what five nights cost in points, and whether that's a good use of them. Then compare the forty-three trips that can take you there.</p>
   </div>
 </header>
 
 <main class="wrap">
+  <section aria-labelledby="resorts-h">
+    <div class="section-head">
+      <div class="board-title">
+        <h2 id="resorts-h">The resorts</h2>
+        <span class="hint" id="resort-count"></span>
+      </div>
+      <div class="controls">
+        <label class="region-filter" for="resort-where"><span class="visually-hidden">Where</span><select id="resort-where"></select></label>
+        <div class="filter" role="group" aria-label="Rank resorts by">
+          <button type="button" id="rsort-value" aria-pressed="true">Points value</button>
+          <button type="button" id="rsort-score" aria-pressed="false">Resort score</button>
+          <button type="button" id="rsort-stars" aria-pressed="false">Our stars</button>
+        </div>
+      </div>
+    </div>
+    <p class="hint resort-hint">Each card prices five nights at the resort against your wallet (Marriott and Hilton give the fifth night free) and compares the points to the cash rate. "Great" means 2¢ or more per point; paying through Amex Travel gets 0.7¢.</p>
+    <div class="cards resort-grid" id="resorts"></div>
+  </section>
+
   <section class="panel" aria-labelledby="priorities-h">
     <div class="panel-head">
       <h2 id="priorities-h">What matters to each of you</h2>
@@ -88,6 +107,7 @@
 
 <script src="data.js"></script>
 <script src="hotels.js"></script>
+<script src="resorts.js"></script>
 <script src="trips.js"></script>
 <script src="photos.js"></script>
 <script src="app.js"></script>

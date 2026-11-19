@@ -310,3 +310,29 @@ main.wrap > *, .cards > * { min-width: 0; }
   .stay { grid-template-columns: auto 1fr; }
   .stay-rate { grid-column: 2; justify-self: start; }
 }
+
+/* resorts */
+.resort-hint { margin-bottom: 14px; }
+.resort-grid { margin-bottom: 36px; }
+.photo-empty { aspect-ratio: 16 / 5; display: grid; place-items: center; background: var(--mast); color: var(--mast-ink); font-size: 0.85rem; opacity: 0.9; }
+.prog-tag { font-size: 0.7rem; font-weight: 600; padding: 1px 7px; border-radius: 4px; background: var(--h1); }
+.prog-tag.prog-marriott, .prog-tag.prog-hilton { background: var(--h3); }
+.prog-tag.prog-hyatt, .prog-tag.prog-ihg { background: var(--h2); }
+.redeem { display: grid; gap: 4px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+.redeem p { margin: 0; font-size: 0.9rem; }
+.redeem-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 2px; }
+.redeem-cost { font-family: var(--mono); font-size: 0.85rem !important; }
+.redeem-path, .redeem-worth { color: var(--muted); }
+.verdict { font-size: 0.78rem; font-weight: 700; padding: 2px 10px; border-radius: 999px; border: 1px solid currentColor; }
+.verdict.great, .verdict.good { color: var(--good); }
+.verdict.great { background: var(--good); color: var(--surface); border-color: var(--good); }
+.verdict.weak, .verdict.cash { color: var(--muted); }
+.verdict.short { color: var(--warn); }
+.resort-line { margin: 0; font-size: 0.9rem; }
+.resort-links { margin: 0; font-size: 0.85rem; color: var(--muted); }
+.resort-links a { color: var(--ink); }
+.stay-profile { font-size: 0.75rem; color: var(--accent-ink); }
+.redeem p:empty { display: none; }
+.resort-grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 520px), 1fr)); align-items: start; }
+.resort .detail-grid { grid-template-columns: 1fr; gap: 16px; }
+.resort .photo { aspect-ratio: 16 / 9; }
